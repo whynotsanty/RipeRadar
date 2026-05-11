@@ -1,0 +1,63 @@
+# RipeRadar Gateway MQTT - Configuração
+# Este ficheiro centraliza todas as configurações do gateway
+
+mqtt:
+  broker: "04f11400208444d287dcce716d5d4823.s1.eu.hivemq.cloud"
+  port: 8883
+  protocol: "MQTTv5"
+  topics:
+    telemetry: "riperadar/telemetria"
+    healthcheck: "riperadar/gateway/healthcheck"
+    errors: "riperadar/gateway/errors"
+  qos: 1
+
+devices:
+  nicla:
+    name: "RipeRadar"
+    uuid: "19B10001-E8F2-537E-4F6C-D104768A1214"
+    description: "Sensor de temperatura, humidade, pressão e VOC"
+    timeout: 10.0
+  arduino:
+    name: "Arduino33"
+    uuid: "19B10011-E8F2-537E-4F6C-D104768A1214"
+    description: "Câmara com modelo de visão (classificação de fruta)"
+    timeout: 10.0
+
+ble:
+  scan_timeout: 10.0
+  connection_timeout: 15.0
+  reconnect_delay: 1.0
+
+fusion:
+  interval_seconds: 2.0
+  required_data_age_seconds: 5.0
+  staleness_timeout_seconds: 10
+
+healthcheck:
+  interval_seconds: 30
+  enabled: true
+
+validation:
+  temperature:
+    min: -40
+    max: 85
+    unit: "°C"
+  humidity:
+    min: 0
+    max: 100
+    unit: "%"
+  pressure:
+    min: 300
+    max: 1100
+    unit: "hPa"
+  confidence:
+    min: 0
+    max: 100
+    unit: "%"
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/gateway.log"
+  format: "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s"
+  max_bytes: 5242880  # 5MB
+  backup_count: 3
