@@ -48,7 +48,7 @@ validation:
     unit: "%"
   pressure:
     min: 300
-    max: 1100
+    max: 1000000
     unit: "hPa"
   confidence:
     min: 0
