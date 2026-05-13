@@ -5,6 +5,7 @@ import os
 import json
 import ssl
 import time
+import threading
 import logging
 import logging.handlers
 import yaml
@@ -20,7 +21,7 @@ with open(config_path, 'r', encoding='utf-8') as f:
 
 # Configurar logging
 os.makedirs("logs", exist_ok=True)
-logger = logging.getLogger("")
+logger = logging.getLogger("RipeRadar")
 logger.setLevel(getattr(logging, CONFIG['logging']['level']))
 file_handler = logging.handlers.RotatingFileHandler(
     CONFIG['logging']['file'], maxBytes=CONFIG['logging']['max_bytes'], backupCount=CONFIG['logging']['backup_count']
@@ -30,6 +31,10 @@ logger.addHandler(file_handler)
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
+
+logger.info("=" * 80)
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
+logger.info("=" * 80)
 
 # Configurações MQTT
 MQTT_BROKER = CONFIG['mqtt']['broker']
@@ -47,16 +52,17 @@ mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
 
 def on_connect(client, userdata, flags, reason_code, properties):
     if reason_code == 0: logger.info("Ligado ao HiveMQ Cloud!")
-    else: logger.error(f"Falha na ligação: {reason_code}")
+    else: logger.error(f"Falha na ligacao: {reason_code}")
 
 mqtt_client.on_connect = on_connect
 mqtt_client.connect_async(MQTT_BROKER, MQTT_PORT, 60)
 mqtt_client.loop_start() 
 
-# Semáforo para o Bluetooth (necessário para não crashar o rádio do Pi)
+# Locks para paralelismo seguro
 ble_scan_lock = asyncio.Lock()
+state_lock = threading.Lock() 
 
-# Estado Global (apenas para cache interna, sem locks)
+# Estado Global (Memória partilhada)
 system_state = {
     "temp": 0.0, "hum": 0.0, "hPa": 0.0, "voc_gas": 0.0,
     "classe_dominante": "Desconhecido", "confianca": 0.0
@@ -85,7 +91,7 @@ def aplicar_late_fusion(payload):
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms (Ω)
+    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
     previsao_nicla = "desconhecido"
     if fruto in ["banana", "maca"]:
         if voc_gas > 17000:
@@ -101,68 +107,80 @@ def aplicar_late_fusion(payload):
             previsao_nicla = "podre"
 
     # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
-    if confianca < 60.0 and fruto != "desconhecido":
+    if confianca < 0.60 and fruto != "desconhecido": # Ajustado para bater certo com escala 0 a 1 do Arduino
         decisao_final = f"{fruto}_{previsao_nicla}"
     else:
         decisao_final = classe_visual
 
-    # 3. Empacota os dados para enviar para o MQTT e para imprimir
+    # 3. Empacota os dados para enviar para o MQTT
     payload["classe_dominante"] = decisao_final
     payload["label_camara"] = classe_visual
     payload["previsao_nicla"] = previsao_nicla
 
     return payload
 
-
-def publicar_dados(origem):
-    """Publica e imprime o resumo da fusão."""
-    try:
-        payload_bruto = system_state.copy()
-        payload_bruto["timestamp"] = time.time()
-        payload_bruto["origem_trigger"] = origem
-
-        # Aplica a inteligência da Fusão
-        payload_final = aplicar_late_fusion(payload_bruto)
-
-        # Envia para a Cloud
-        mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
-        
-        # O Print focado e direto que pediste
-        logger.info(
-            f"Decisão Final: {payload_final['classe_dominante']} | "
-            f"Confiança Câmara: {payload_final['confianca']} | "
-            f"Label Câmara: {payload_final['label_camara']} | "
-            f"VOCs: {payload_final['voc_gas']} Ω | "
-            f"Previsão Nicla: {payload_final['previsao_nicla']}"
-        )
-    except Exception as e:
-        logger.error(f"Erro ao publicar: {e}")
-
+# -----------------------------------------------------------------------------
+# HANDLERS (Apenas atualizam a memória silenciosamente)
+# -----------------------------------------------------------------------------
 def nicla_handler(sender, data):
-    """Handler Nicla: Atualiza e publica imediatamente."""
     payload = data.decode('utf-8').strip()
     nums = re.findall(r"[-+]?\d*\.\d+|\d+", payload)
     
     if len(nums) == 4:
         t, h, p, v = map(float, nums)
+        if p > 10000: p = p / 100.0 # Converte Pa para hPa
+        
         if validar_valor(t, "temp") and validar_valor(h, "hum"):
-            system_state.update({"temp": t, "hum": h, "hPa": p, "voc_gas": v})
-            publicar_dados("nicla")
+            with state_lock:
+                system_state.update({"temp": t, "hum": h, "hPa": p, "voc_gas": v})
     else:
-        logger.error(f"Payload Nicla inválido: {len(nums)} valores")
+        logger.error(f"Payload Nicla invalido: {len(nums)} valores")
 
 def vision_handler(sender, data):
-    """Handler Visão: Atualiza e publica imediatamente."""
     try:
         vision_data = json.loads(data.decode('utf-8').strip())
         if "classe_dominante" in vision_data:
-            system_state.update({
-                "classe_dominante": vision_data["classe_dominante"],
-                "confianca": float(vision_data.get("confianca", 0))
-            })
-            publicar_dados("vision")
+            with state_lock:
+                system_state.update({
+                    "classe_dominante": vision_data["classe_dominante"],
+                    "confianca": float(vision_data.get("confianca", 0))
+                })
     except Exception as e:
-        logger.error(f"Erro JSON Câmara: {e}")
+        logger.error(f"Erro JSON Camara: {e}")
+
+# -----------------------------------------------------------------------------
+# SCHEDULERS (Tratam da Publicação MQTT)
+# -----------------------------------------------------------------------------
+async def publicacao_periodica_scheduler():
+    """
+    O Relógio Mestre: A cada 30 segundos exatos publica.
+    """
+    logger.info("Scheduler de Publicacao ativado (Intervalo: 30s)")
+    while True:
+        await asyncio.sleep(30)
+        try:
+            with state_lock:
+                payload_bruto = system_state.copy()
+            
+            payload_bruto["timestamp"] = time.time()
+            payload_bruto["origem_trigger"] = "timer_30s"
+
+            # Aplica a inteligência da Fusão
+            payload_final = aplicar_late_fusion(payload_bruto)
+
+            # Envia para a Cloud
+            mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
+            
+            # Print focado e direto (sem acentos para não quebrar no terminal)
+            logger.info(
+                f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
+                f"Conf. Camara: {payload_final['confianca']:.3f} | "
+                f"Label Camara: {payload_final['label_camara']} | "
+                f"VOCs: {payload_final['voc_gas']} Ohms | "
+                f"Nicla: {payload_final['previsao_nicla']}"
+            )
+        except Exception as e:
+            logger.error(f"Erro ao publicar: {e}")
 
 async def healthcheck_scheduler():
     while True:
@@ -170,39 +188,46 @@ async def healthcheck_scheduler():
         heartbeat = {"timestamp": time.time(), "status": "OK", "gateway_id": random_id}
         mqtt_client.publish(HEALTHCHECK_TOPIC, json.dumps(heartbeat), qos=1)
 
+# -----------------------------------------------------------------------------
+# GESTOR DE CONEXÃO BLE
+# -----------------------------------------------------------------------------
 async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
     char_uuid_lower = char_uuid.lower()
     while True:
         try:
             async with ble_scan_lock:
-                device = await BleakScanner.find_device_by_name(nome_dispositivo, timeout=5.0)
+                device = await BleakScanner.find_device_by_name(nome_dispositivo, timeout=3.0)
             
             if device:
                 async with BleakClient(device, timeout=10.0) as client:
                     if modo == "notify":
                         await client.start_notify(char_uuid_lower, handler)
-                        while client.is_connected: await asyncio.sleep(1)
+                        while client.is_connected: 
+                            await asyncio.sleep(1)
                     elif modo == "read":
                         data = await client.read_gatt_char(char_uuid_lower)
                         handler(None, data)
-                        await client.disconnect()
+                        await client.disconnect() 
         except Exception as e:
-            logger.debug(f"[{nome_dispositivo}] BLE reconnecting... ({e})")
-        await asyncio.sleep(2)
+            if "was disconnected" not in str(e) and "not found" not in str(e):
+                pass
+        
+        await asyncio.sleep(1)
 
 async def main():
-    logger.info("Gateway em modo de Publicação")
+    logger.info("Iniciando conectores BLE em pano de fundo...")
     
-    # Criar tarefas
     tarefa_nicla = asyncio.create_task(gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify"))
     tarefa_visao = asyncio.create_task(gerir_conexao(CONFIG['devices']['arduino']['name'], CONFIG['devices']['arduino']['uuid'], vision_handler, "read"))
+    tarefa_pub = asyncio.create_task(publicacao_periodica_scheduler())
     tarefa_health = asyncio.create_task(healthcheck_scheduler())
     
-    await asyncio.gather(tarefa_nicla, tarefa_visao, tarefa_health)
+    await asyncio.gather(tarefa_nicla, tarefa_visao, tarefa_pub, tarefa_health)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
+        logger.info("Encerrando Gateway...")
         mqtt_client.disconnect()
         mqtt_client.loop_stop()
