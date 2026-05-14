@@ -4,7 +4,7 @@ import datetime
 import re
 
 def parse_logs(log_file):
-    """Extrai os timestamps reais (datetime) do ficheiro txt."""
+    """Extrai os timestamps reais (datetime) dos ficheiros txt."""
     timestamps = []
     with open(log_file, 'r', encoding='utf-8') as f:
         for line in f:
