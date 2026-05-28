@@ -146,54 +146,11 @@ def validar_valor(valor, key):
         return min_v <= valor <= max_v
     return True
 
-def aplicar_late_fusion(payload):
-    """
-    Calcula o estado através dos gases e aplica o Override se a visão falhar.
-    """
-    classe_visual = payload.get("classe_dominante", "desconhecido")
-    confianca = float(payload.get("confianca", 100.0)) 
-    voc_gas = float(payload.get("voc_gas", 0.0))
-
-    fruto = classe_visual.split("_")[0].lower()
-    if fruto not in ["banana", "maca", "laranja"]:
-        fruto = "desconhecido"
-
-    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
-    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
-    previsao_nicla = "desconhecido"
-    if fruto in ["banana", "maca"]:
-        if voc_gas > 17000:
-            previsao_nicla = "fresca"
-        elif 13000 <= voc_gas <= 17000:
-            previsao_nicla = "madura"
-        else:
-            previsao_nicla = "podre"
-    elif fruto == "laranja":
-        if voc_gas >= 16000:
-            previsao_nicla = "fresca"
-        else:
-            previsao_nicla = "podre"
-
-    # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
-    if confianca < 0.60 and fruto != "desconhecido": 
-        decisao_final = f"{fruto}_{previsao_nicla}"
-    else:
-        decisao_final = classe_visual
-
-    # 3. Empacota os dados para enviar para o MQTT
-    # 3. Empacota os dados para enviar para o MQTT
-    payload["classe_dominante"] = decisao_final
-    payload["label_camara"] = classe_visual
-    payload["previsao_nicla"] = previsao_nicla
-
-    return payload
 
 # -----------------------------------------------------------------------------
 # HANDLERS (Apenas atualizam a memória silenciosamente)
 # -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# HANDLERS (Apenas atualizam a memória silenciosamente)
-# -----------------------------------------------------------------------------
+
 def nicla_handler(sender, data):
     payload = data.decode('utf-8').strip()
     nums = re.findall(r"[-+]?\d*\.\d+|\d+", payload)
@@ -272,9 +229,6 @@ async def healthcheck_scheduler():
 # -----------------------------------------------------------------------------
 # GESTOR DE CONEXÃO BLE
 # -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# GESTOR DE CONEXÃO BLE
-# -----------------------------------------------------------------------------
 async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
     char_uuid_lower = char_uuid.lower()
     while True:
@@ -305,7 +259,89 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
                 pass
         
         await asyncio.sleep(1)
+def calcular_confianca_nicla(voc_gas, fruto):
+    """
+    Sintetiza uma confiança [0.5 a 1.0] baseada na distância aos thresholds.
+    """
+    if fruto in ["banana", "maca"]:
+        if voc_gas > 17000:
+            # Zona Fresca: quanto maior, mais confiança
+            dist = voc_gas - 17000
+            return 0.5 + min(dist / 4000.0, 0.49)
+        elif 13000 <= voc_gas <= 17000:
+            # Zona Madura: pico de confiança no centro (15000)
+            dist_centro = abs(voc_gas - 15000)
+            return 1.0 - (dist_centro / 2000.0) * 0.5
+        else:
+            # Zona Podre: quanto menor, mais confiança
+            dist = 13000 - voc_gas
+            return 0.5 + min(dist / 4000.0, 0.49)
+            
+    elif fruto == "laranja":
+        if voc_gas >= 16000:
+            dist = voc_gas - 16000
+            return 0.5 + min(dist / 4000.0, 0.49)
+        else:
+            dist = 16000 - voc_gas
+            return 0.5 + min(dist / 4000.0, 0.49)
+            
+    return 0.0
 
+def aplicar_late_fusion(payload):
+    """
+    Calcula o estado através dos gases e aplica o Override se a visão falhar,
+    gerando uma Confiança Final do sistema.
+    """
+    classe_visual = payload.get("classe_dominante", "desconhecido")
+    # Assegurar que a confiança da câmara está em formato decimal (0.0 a 1.0)
+    confianca_cam = float(payload.get("confianca", 1.0))
+    if confianca_cam > 1.0: 
+        confianca_cam = confianca_cam / 100.0 
+        
+    voc_gas = float(payload.get("voc_gas", 0.0))
+
+    fruto = classe_visual.split("_")[0].lower()
+    if fruto not in ["banana", "maca", "laranja"]:
+        fruto = "desconhecido"
+
+    # 1. Previsão do Nicla e Confiança Sintética
+    previsao_nicla = "desconhecido"
+    if fruto in ["banana", "maca"]:
+        if voc_gas > 17000: previsao_nicla = "fresca"
+        elif 13000 <= voc_gas <= 17000: previsao_nicla = "madura"
+        else: previsao_nicla = "podre"
+    elif fruto == "laranja":
+        if voc_gas >= 16000: previsao_nicla = "fresca"
+        else: previsao_nicla = "podre"
+
+    confianca_nicla = calcular_confianca_nicla(voc_gas, fruto)
+
+    # 2. Fusão de Decisão e Cálculo da Confiança Final
+    if confianca_cam < 0.60 and fruto != "desconhecido": 
+        # O Nicla ganha devido à baixa confiança da câmara
+        decisao_final = f"{fruto}_{previsao_nicla}"
+        # A confiança final é a do Nicla, penalizada ligeiramente porque houve divergência
+        confianca_final = confianca_nicla * 0.9 
+    else:
+        # A Câmara ganha
+        decisao_final = classe_visual
+        # Se o Nicla concordar com a câmara, damos um "boost" à confiança final
+        if previsao_nicla in classe_visual:
+            confianca_final = min(confianca_cam + (confianca_nicla * 0.15), 1.0)
+        else:
+            # Se discordarem, mantemos a da câmara (poderias aplicar uma penalização aqui se quisesses)
+            confianca_final = confianca_cam
+
+    # 3. Empacota os dados
+    payload["classe_dominante"] = decisao_final
+    payload["label_camara"] = classe_visual
+    payload["previsao_nicla"] = previsao_nicla
+    payload["confianca_camara"] = round(confianca_cam * 100, 2)
+    payload["confianca_nicla"] = round(confianca_nicla * 100, 2)
+    payload["confianca_final"] = round(confianca_final * 100, 2) # Substitui a antiga "confianca"
+
+    return payload
+    
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
     logger.info("Iniciando conectores BLE em pano de fundo...")
