@@ -13,7 +13,6 @@ const char* ssid = "MEO-9F2720";
 const char* pass = "3499392948";
 
 
-// Credenciais InfluxDB (Substitui com os teus dados)
 const char* influx_server = "eu-central-1-1.aws.cloud2.influxdata.com"; 
 String token = "Y5_u5FEICS9mkR2Dl2aPZUsX-lihtneYuuYF5ooHET9ncXDPHBDS2xO6mD-ox1358d_qQUOsvyNWRqT4TtJkzw==";
 String org = "a00b549847ff266a";

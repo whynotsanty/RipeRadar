@@ -300,3 +300,191 @@
 [2026-05-28 21:57:14,090] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 39203.0 Ohms | Nicla: fresca
 [2026-05-28 21:57:44,092] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.940 | Label Camara: banana_fresca | VOCs: 39239.0 Ohms | Nicla: fresca
 [2026-05-28 21:58:07,328] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 22:00:58,770] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:00:58,771] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 22:00:58,771] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:00:58,791] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 22:00:58,830] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 22:00:59,409] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 22:01:28,832] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 39457.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:01:58,834] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 39603.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:02:28,835] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 39640.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:02:58,836] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 39751.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:03:28,838] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 39530.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:03:58,839] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 39751.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:04:28,841] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 39603.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:04:58,842] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.700 | Label Camara: banana_fresca | VOCs: 39900.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:05:28,843] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 39900.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:05:58,845] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 39862.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:06:28,846] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 39900.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:06:58,847] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.800 | Label Camara: banana_fresca | VOCs: 39862.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:07:28,848] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 39788.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:07:58,850] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.800 | Label Camara: banana_fresca | VOCs: 40012.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:08:28,851] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 39975.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:08:58,853] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40050.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:09:28,853] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 39862.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:09:58,855] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40050.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:10:28,857] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 40087.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:10:58,859] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40163.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:11:28,860] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40163.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:11:58,862] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 40125.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:12:28,864] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.660 | Label Camara: banana_fresca | VOCs: 40238.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:12:58,865] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 39975.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:13:28,867] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.840 | Label Camara: banana_fresca | VOCs: 40012.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:13:58,871] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.830 | Label Camara: banana_fresca | VOCs: 40201.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:14:28,872] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40201.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:14:58,878] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 40238.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:15:28,879] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 40238.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:15:58,881] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:16:28,883] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.730 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:16:58,884] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40314.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:17:28,885] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:17:58,888] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.890 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:18:28,889] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.870 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:18:58,891] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40314.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:19:28,892] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.800 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:19:58,893] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40163.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:20:28,894] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40314.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:20:58,896] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:21:28,897] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40391.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:21:58,898] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:22:28,900] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:22:58,901] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:23:28,902] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:23:58,903] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 40201.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:24:28,904] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:24:58,905] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.940 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:25:28,907] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.900 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:25:58,907] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.630 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:26:28,909] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.850 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:26:58,911] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:27:28,912] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.900 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:27:58,913] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:28:28,914] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.840 | Label Camara: banana_fresca | VOCs: 40391.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:28:58,917] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.650 | Label Camara: banana_fresca | VOCs: 40238.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:29:28,918] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.940 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:29:58,919] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.990 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:30:28,920] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:30:58,923] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40201.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:31:28,924] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.810 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:31:58,925] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:32:28,928] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.860 | Label Camara: banana_fresca | VOCs: 40314.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:32:58,929] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:33:28,932] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:33:58,934] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.840 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:34:28,936] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.880 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:34:58,937] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40506.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:35:28,939] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 40544.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:35:58,941] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 40544.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:36:28,942] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 40506.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:36:58,943] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 40429.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:37:28,944] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 40467.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:37:58,945] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.680 | Label Camara: banana_fresca | VOCs: 40583.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:38:28,947] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.830 | Label Camara: laranja_podre | VOCs: 40544.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:38:58,948] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.710 | Label Camara: laranja_podre | VOCs: 40544.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:39:28,949] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.990 | Label Camara: laranja_podre | VOCs: 40506.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:39:58,950] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.700 | Label Camara: laranja_podre | VOCs: 40544.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:40:28,952] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.970 | Label Camara: laranja_podre | VOCs: 40622.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:40:58,954] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.920 | Label Camara: laranja_podre | VOCs: 40622.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:41:28,957] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.770 | Label Camara: banana_fresca | VOCs: 40738.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:41:58,959] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.870 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:42:28,960] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.990 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:42:58,962] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.900 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:43:28,964] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.890 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:43:58,966] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.990 | Label Camara: laranja_podre | VOCs: 40777.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:44:28,967] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.760 | Label Camara: laranja_podre | VOCs: 40622.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:44:58,969] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.980 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:45:28,970] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.980 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:45:58,971] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.840 | Label Camara: laranja_podre | VOCs: 40660.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:46:15,586] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 22:46:17,866] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:46:17,866] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 22:46:17,866] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:46:17,881] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 22:46:17,921] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 22:46:18,612] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 22:46:47,923] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.930 | Label Camara: banana_fresca | VOCs: 497087.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:47:17,926] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.990 | Label Camara: laranja_fresca | VOCs: 43971.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:47:47,927] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.800 | Label Camara: laranja_fresca | VOCs: 36117.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:48:17,929] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.920 | Label Camara: laranja_fresca | VOCs: 37285.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:48:47,931] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 36994.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:49:17,933] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.960 | Label Camara: laranja_fresca | VOCs: 37780.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:49:47,935] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.980 | Label Camara: laranja_fresca | VOCs: 38392.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:50:17,936] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 38776.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:50:47,937] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.640 | Label Camara: laranja_fresca | VOCs: 39457.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:50:48,018] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 22:51:46,978] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:51:46,979] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 22:51:46,979] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:51:46,994] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 22:51:47,029] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 22:51:47,436] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 22:52:17,031] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.960 | Label Camara: laranja_fresca | VOCs: 1602190.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:52:47,033] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.910 | Label Camara: laranja_fresca | VOCs: 113980.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:53:17,034] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.980 | Label Camara: laranja_fresca | VOCs: 32711.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:53:47,035] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.990 | Label Camara: laranja_fresca | VOCs: 34233.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:54:17,037] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.960 | Label Camara: laranja_fresca | VOCs: 34963.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:54:47,038] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.970 | Label Camara: laranja_fresca | VOCs: 34622.0 Ohms | Nicla: desconhecido
+[2026-05-28 22:55:10,398] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 22:55:11,556] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:55:11,557] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 22:55:11,557] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 22:55:11,584] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 22:55:11,626] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 22:55:12,133] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 22:55:41,628] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 36086.0 Ohms | Nicla: podre
+[2026-05-28 22:56:11,629] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 1.000 | Label Camara: laranja_fresca | VOCs: 36394.0 Ohms | Nicla: podre
+[2026-05-28 22:56:41,631] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 36930.0 Ohms | Nicla: podre
+[2026-05-28 22:57:11,633] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.990 | Label Camara: laranja_fresca | VOCs: 36962.0 Ohms | Nicla: podre
+[2026-05-28 22:57:41,635] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.980 | Label Camara: laranja_fresca | VOCs: 37713.0 Ohms | Nicla: podre
+[2026-05-28 22:58:11,636] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.980 | Label Camara: laranja_fresca | VOCs: 38016.0 Ohms | Nicla: podre
+[2026-05-28 22:58:41,637] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 38392.0 Ohms | Nicla: podre
+[2026-05-28 22:59:11,638] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.770 | Label Camara: laranja_fresca | VOCs: 38496.0 Ohms | Nicla: podre
+[2026-05-28 22:59:41,640] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.680 | Label Camara: banana_fresca | VOCs: 38811.0 Ohms | Nicla: podre
+[2026-05-28 23:00:11,641] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 38953.0 Ohms | Nicla: podre
+[2026-05-28 23:00:41,642] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.640 | Label Camara: banana_fresca | VOCs: 39203.0 Ohms | Nicla: podre
+[2026-05-28 23:01:11,643] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.570 | Label Camara: banana_fresca | VOCs: 39530.0 Ohms | Nicla: podre
+[2026-05-28 23:01:41,645] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 1.000 | Label Camara: banana_fresca | VOCs: 39457.0 Ohms | Nicla: podre
+[2026-05-28 23:02:11,646] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.990 | Label Camara: banana_fresca | VOCs: 39900.0 Ohms | Nicla: podre
+[2026-05-28 23:02:41,648] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.940 | Label Camara: banana_fresca | VOCs: 39900.0 Ohms | Nicla: podre
+[2026-05-28 23:03:11,649] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.990 | Label Camara: banana_fresca | VOCs: 40276.0 Ohms | Nicla: podre
+[2026-05-28 23:03:41,650] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 1.000 | Label Camara: banana_fresca | VOCs: 40391.0 Ohms | Nicla: podre
+[2026-05-28 23:04:11,651] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.860 | Label Camara: banana_fresca | VOCs: 40353.0 Ohms | Nicla: podre
+[2026-05-28 23:04:41,653] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 40738.0 Ohms | Nicla: podre
+[2026-05-28 23:05:11,654] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.860 | Label Camara: banana_fresca | VOCs: 40583.0 Ohms | Nicla: podre
+[2026-05-28 23:05:41,655] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 40933.0 Ohms | Nicla: podre
+[2026-05-28 23:06:11,658] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.990 | Label Camara: banana_fresca | VOCs: 40855.0 Ohms | Nicla: podre
+[2026-05-28 23:06:41,659] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.860 | Label Camara: banana_fresca | VOCs: 41250.0 Ohms | Nicla: podre
+[2026-05-28 23:07:11,660] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 1.000 | Label Camara: banana_fresca | VOCs: 41370.0 Ohms | Nicla: podre
+[2026-05-28 23:07:41,662] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.910 | Label Camara: banana_fresca | VOCs: 41210.0 Ohms | Nicla: podre
+[2026-05-28 23:08:11,664] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 41410.0 Ohms | Nicla: podre
+[2026-05-28 23:08:41,666] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.640 | Label Camara: banana_podre | VOCs: 41693.0 Ohms | Nicla: podre
+[2026-05-28 23:09:11,667] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.890 | Label Camara: banana_podre | VOCs: 41612.0 Ohms | Nicla: podre
+[2026-05-28 23:09:41,668] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.640 | Label Camara: banana_fresca | VOCs: 41775.0 Ohms | Nicla: podre
+[2026-05-28 23:10:11,670] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.860 | Label Camara: banana_podre | VOCs: 41816.0 Ohms | Nicla: podre
+[2026-05-28 23:10:41,671] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.820 | Label Camara: banana_podre | VOCs: 41980.0 Ohms | Nicla: podre
+[2026-05-28 23:11:11,673] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.820 | Label Camara: banana_fresca | VOCs: 42063.0 Ohms | Nicla: podre
+[2026-05-28 23:11:41,675] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.710 | Label Camara: banana_podre | VOCs: 41898.0 Ohms | Nicla: podre
+[2026-05-28 23:12:11,677] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.860 | Label Camara: banana_fresca | VOCs: 41857.0 Ohms | Nicla: podre
+[2026-05-28 23:12:41,679] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.910 | Label Camara: banana_podre | VOCs: 42272.0 Ohms | Nicla: podre
+[2026-05-28 23:13:11,680] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 42022.0 Ohms | Nicla: podre
+[2026-05-28 23:13:41,682] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.770 | Label Camara: banana_podre | VOCs: 42398.0 Ohms | Nicla: podre
+[2026-05-28 23:14:11,683] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.640 | Label Camara: banana_fresca | VOCs: 42356.0 Ohms | Nicla: podre
+[2026-05-28 23:14:41,686] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.770 | Label Camara: banana_fresca | VOCs: 42398.0 Ohms | Nicla: podre
+[2026-05-28 23:15:11,686] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.960 | Label Camara: banana_fresca | VOCs: 42440.0 Ohms | Nicla: podre
+[2026-05-28 23:15:41,688] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.890 | Label Camara: banana_fresca | VOCs: 42482.0 Ohms | Nicla: podre
+[2026-05-28 23:16:11,689] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.940 | Label Camara: banana_fresca | VOCs: 42609.0 Ohms | Nicla: podre
+[2026-05-28 23:16:41,690] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.980 | Label Camara: banana_fresca | VOCs: 42398.0 Ohms | Nicla: podre
+[2026-05-28 23:17:11,691] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.570 | Label Camara: banana_fresca | VOCs: 42567.0 Ohms | Nicla: podre
+[2026-05-28 23:17:41,693] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.950 | Label Camara: banana_fresca | VOCs: 42652.0 Ohms | Nicla: podre
+[2026-05-28 23:18:11,697] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.500 | Label Camara: banana_fresca | VOCs: 42482.0 Ohms | Nicla: podre
+[2026-05-28 23:18:41,697] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.970 | Label Camara: banana_fresca | VOCs: 42780.0 Ohms | Nicla: podre
+[2026-05-28 23:19:11,698] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.930 | Label Camara: laranja_fresca | VOCs: 42652.0 Ohms | Nicla: podre
+[2026-05-28 23:19:41,700] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.910 | Label Camara: laranja_fresca | VOCs: 42524.0 Ohms | Nicla: podre
+[2026-05-28 23:20:11,701] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.950 | Label Camara: laranja_fresca | VOCs: 42356.0 Ohms | Nicla: podre
+[2026-05-28 23:20:41,702] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.620 | Label Camara: laranja_fresca | VOCs: 42272.0 Ohms | Nicla: podre
+[2026-05-28 23:21:11,705] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.750 | Label Camara: laranja_fresca | VOCs: 42314.0 Ohms | Nicla: podre
+[2026-05-28 23:21:41,706] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.750 | Label Camara: laranja_fresca | VOCs: 42063.0 Ohms | Nicla: podre
+[2026-05-28 23:22:11,708] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.930 | Label Camara: laranja_fresca | VOCs: 42398.0 Ohms | Nicla: podre
+[2026-05-28 23:22:41,710] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.960 | Label Camara: laranja_fresca | VOCs: 42314.0 Ohms | Nicla: podre
+[2026-05-28 23:23:11,711] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_fresca | Conf. Camara: 0.980 | Label Camara: laranja_fresca | VOCs: 42440.0 Ohms | Nicla: podre

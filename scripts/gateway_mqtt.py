@@ -91,29 +91,29 @@ def aplicar_late_fusion(payload):
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. O Nicla calcula a sua previs�o com base nos limiares documentados
+    # 1. O Nicla calcula a sua previsao com base nos limiares documentados
     previsao_nicla = "desconhecido"
     
     if fruto == "banana":
         if voc_gas < 27500:
             previsao_nicla = "fresca"
-        elif 27500 <= voc_gas <= 31000:
+        elif 27500 <= voc_gas:
             previsao_nicla = "podre"
     
     elif fruto == "maca":
         if voc_gas < 33000:
             previsao_nicla = "fresca"
-        elif 33000 <= voc_gas <= 38000:
+        elif 33000 <= voc_gas:
             previsao_nicla = "podre"
             
     elif fruto == "laranja":
         if voc_gas < 28500:
             previsao_nicla = "fresca"
-        elif 28500 <= voc_gas <= 32000:
+        elif 28500 <= voc_gas:
             previsao_nicla = "podre"
 
     # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
-    if confianca < 0.60 and fruto != "desconhecido": # Ajustado para bater certo com escala 0 a 1 do Arduino
+    if confianca < 0.60 and fruto != "desconhecido":
         decisao_final = f"{fruto}_{previsao_nicla}"
     else:
         decisao_final = classe_visual
@@ -177,7 +177,6 @@ async def publicacao_periodica_scheduler():
             # Envia para a Cloud
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
-            # Print focado e direto (sem acentos para não quebrar no terminal)
             logger.info(
                 f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
                 f"Conf. Camara: {payload_final['confianca']:.3f} | "
@@ -228,9 +227,6 @@ async def main():
         gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify")
     )
     
-    # CORREÇÃO PARA O ARDUINO33:
-    # 1. Usar o UUID da Característica (19B10011...) definido no .ino em vez do Serviço
-    # 2. Mudar o modo para "notify" para que a condição `jsonChar.subscribed()` no Arduino seja verdadeira
     UUID_CHAR_ARDUINO = "19B10011-E8F2-537E-4F6C-D104768A1214"
     tarefa_visao = asyncio.create_task(
         gerir_conexao(CONFIG['devices']['arduino']['name'], UUID_CHAR_ARDUINO, vision_handler, "notify")
