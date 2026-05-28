@@ -6,6 +6,7 @@ import json
 import ssl
 import time
 import threading
+import threading
 import logging
 import logging.handlers
 import yaml
@@ -25,6 +26,7 @@ with open(config_path, 'r', encoding='utf-8') as f:
 # Configurar logging
 os.makedirs("logs", exist_ok=True)
 logger = logging.getLogger("RipeRadar")
+logger = logging.getLogger("RipeRadar")
 logger.setLevel(getattr(logging, CONFIG['logging']['level']))
 file_handler = logging.handlers.RotatingFileHandler(
     CONFIG['logging']['file'], maxBytes=CONFIG['logging']['max_bytes'], backupCount=CONFIG['logging']['backup_count']
@@ -34,6 +36,10 @@ logger.addHandler(file_handler)
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
+
+logger.info("=" * 80)
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
+logger.info("=" * 80)
 
 logger.info("=" * 80)
 logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
@@ -117,9 +123,12 @@ mqtt_client.connect_async(MQTT_BROKER, MQTT_PORT, 60)
 mqtt_client.loop_start()
 
 # Locks para paralelismo seguro
+# Locks para paralelismo seguro
 ble_scan_lock = asyncio.Lock()
 state_lock = threading.Lock() 
+state_lock = threading.Lock() 
 
+# Estado Global (Memória partilhada)
 # Estado Global (Memória partilhada)
 system_state = {
     "temp": 0.0, "hum": 0.0, "hPa": 0.0, "voc_gas": 0.0,
@@ -150,6 +159,7 @@ def aplicar_late_fusion(payload):
         fruto = "desconhecido"
 
     # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
+    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
     previsao_nicla = "desconhecido"
     if fruto in ["banana", "maca"]:
         if voc_gas > 17000:
@@ -171,12 +181,16 @@ def aplicar_late_fusion(payload):
         decisao_final = classe_visual
 
     # 3. Empacota os dados para enviar para o MQTT
+    # 3. Empacota os dados para enviar para o MQTT
     payload["classe_dominante"] = decisao_final
     payload["label_camara"] = classe_visual
     payload["previsao_nicla"] = previsao_nicla
 
     return payload
 
+# -----------------------------------------------------------------------------
+# HANDLERS (Apenas atualizam a memória silenciosamente)
+# -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # HANDLERS (Apenas atualizam a memória silenciosamente)
 # -----------------------------------------------------------------------------
@@ -188,16 +202,26 @@ def nicla_handler(sender, data):
         t, h, p, v = map(float, nums)
         if p > 10000: p = p / 100.0 # Converte Pa para hPa
         
+        if p > 10000: p = p / 100.0 # Converte Pa para hPa
+        
         if validar_valor(t, "temp") and validar_valor(h, "hum"):
             with state_lock:
                 system_state.update({"temp": t, "hum": h, "hPa": p, "voc_gas": v})
+            with state_lock:
+                system_state.update({"temp": t, "hum": h, "hPa": p, "voc_gas": v})
     else:
+        logger.error(f"Payload Nicla invalido: {len(nums)} valores")
         logger.error(f"Payload Nicla invalido: {len(nums)} valores")
 
 def vision_handler(sender, data):
     try:
         vision_data = json.loads(data.decode('utf-8').strip())
         if "classe_dominante" in vision_data:
+            with state_lock:
+                system_state.update({
+                    "classe_dominante": vision_data["classe_dominante"],
+                    "confianca": float(vision_data.get("confianca", 0))
+                })
             with state_lock:
                 system_state.update({
                     "classe_dominante": vision_data["classe_dominante"],
@@ -248,11 +272,15 @@ async def healthcheck_scheduler():
 # -----------------------------------------------------------------------------
 # GESTOR DE CONEXÃO BLE
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# GESTOR DE CONEXÃO BLE
+# -----------------------------------------------------------------------------
 async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
     char_uuid_lower = char_uuid.lower()
     while True:
         try:
             async with ble_scan_lock:
+                device = await BleakScanner.find_device_by_name(nome_dispositivo, timeout=3.0)
                 device = await BleakScanner.find_device_by_name(nome_dispositivo, timeout=3.0)
             
             if device:
@@ -261,11 +289,18 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
                         await client.start_notify(char_uuid_lower, handler)
                         while client.is_connected: 
                             await asyncio.sleep(1)
+                        while client.is_connected: 
+                            await asyncio.sleep(1)
                     elif modo == "read":
                         data = await client.read_gatt_char(char_uuid_lower)
                         handler(None, data)
                         await client.disconnect() 
+                        await client.disconnect() 
         except Exception as e:
+            if "was disconnected" not in str(e) and "not found" not in str(e):
+                pass
+        
+        await asyncio.sleep(1)
             if "was disconnected" not in str(e) and "not found" not in str(e):
                 pass
         
@@ -273,18 +308,22 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
 
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
+    logger.info("Iniciando conectores BLE em pano de fundo...")
     
     tarefa_nicla = asyncio.create_task(gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify"))
     tarefa_visao = asyncio.create_task(gerir_conexao(CONFIG['devices']['arduino']['name'], CONFIG['devices']['arduino']['uuid'], vision_handler, "read"))
     tarefa_pub = asyncio.create_task(publicacao_periodica_scheduler())
+    tarefa_pub = asyncio.create_task(publicacao_periodica_scheduler())
     tarefa_health = asyncio.create_task(healthcheck_scheduler())
     
+    await asyncio.gather(tarefa_nicla, tarefa_visao, tarefa_pub, tarefa_health)
     await asyncio.gather(tarefa_nicla, tarefa_visao, tarefa_pub, tarefa_health)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
+        logger.info("Encerrando Gateway...")
         logger.info("Encerrando Gateway...")
         mqtt_client.disconnect()
         mqtt_client.loop_stop()
