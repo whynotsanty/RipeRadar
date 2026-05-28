@@ -133,119 +133,214 @@ void resizeImage(int srcWidth, int srcHeight, uint8_t *srcImage, int dstWidth, i
 void cropImage(int srcWidth, int srcHeight, uint8_t *srcImage, int startX, int startY, int dstWidth, int dstHeight, uint8_t *dstImage, int iBpp);
 
 /**
- * @brief  Arduino setup function
- */
+* @brief      Arduino setup function
+*/
 void setup()
 {
+    // put your setup code here, to run once:
     Serial.begin(115200);
-    Serial.println("Edge Impulse Inferencing Demo - BLE Lote (Connect-and-Dump)");
+    // comment out the below line to cancel the wait for USB connection (needed for native USB)
+    //while (!Serial);
+    //Serial.println("Edge Impulse Inferencing Demo - Com BLE Integrado");
 
+    // summary of inferencing settings (from model_metadata.h)
     ei_printf("Inferencing settings:\n");
     ei_printf("\tImage resolution: %dx%d\n", EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT);
     ei_printf("\tFrame size: %d\n", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
     ei_printf("\tNo. of classes: %d\n", sizeof(ei_classifier_inferencing_categories) / sizeof(ei_classifier_inferencing_categories[0]));
 
-    // Iniciar a Câmara
-    if (ei_camera_init() == false) {
-        ei_printf("ERR: Failed to initialize image sensor. Para a execucao.\r\n");
-        while (1);
-    }
-    ei_printf("Camara inicializada com sucesso!\n");
-
-    // Iniciar BLE
+    // --- ADIÇÃO: Iniciar BLE ---
     if (!BLE.begin()) {
         ei_printf("Falha ao iniciar o modulo BLE!\n");
         while (1);
     }
-  
+    
     BLE.setLocalName("Arduino33"); 
     BLE.setAdvertisedService(jsonService);
     jsonService.addCharacteristic(jsonChar);
     BLE.addService(jsonService);
     BLE.advertise();
     ei_printf("[INFO] BLE ativo. A aguardar ligacao do Gateway...\n");
+    // ---------------------------
 }
 
 /**
- * @brief  Get data and run inferencing
- */
+* @brief      Get data and run inferencing
+*
+* @param[in]  debug  Get debug info if true
+*/
 void loop()
 {
-    // 1. DESLIGA O BLE PARA A CÂMARA NÃO SUFOCAR O RÁDIO
-    BLE.disconnect();
-    BLE.stopAdvertise();
+    bool stop_inferencing = false;
 
-    // 2. TIRAR FOTO E CORRER INFERÊNCIA
-    if (ei_camera_init() == false) {
-        ei_printf("ERR: Failed to initialize image sensor\r\n");
-        return;
-    }
+    while(stop_inferencing == false) {
+        ei_printf("\nStarting inferencing in 2 seconds...\n");
 
-    uint32_t resize_col_sz, resize_row_sz;
-    bool do_resize = false;
-    calculate_resize_dimensions(EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT, &resize_col_sz, &resize_row_sz, &do_resize);
-
-    void *snapshot_mem = ei_malloc(resize_col_sz * resize_row_sz * 2);
-    if(snapshot_mem == NULL) return;
-    uint8_t *snapshot_buf = (uint8_t *)DWORD_ALIGN_PTR((uintptr_t)snapshot_mem);
-
-    if (ei_camera_capture(EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT, snapshot_buf) == false) {
-        ei_free(snapshot_mem);
-        return;
-    }
-
-    ei::signal_t signal;
-    signal.total_length = EI_CLASSIFIER_INPUT_WIDTH * EI_CLASSIFIER_INPUT_HEIGHT;
-    signal.get_data = &ei_camera_cutout_get_data;
-
-    ei_impulse_result_t result = { 0 };
-    run_classifier(&signal, &result, debug_nn);
-
-    float max_val = 0.0;
-    const char* max_label = "indefinido";
-    for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
-        if (result.classification[i].value > max_val) {
-            max_val = result.classification[i].value;
-            max_label = ei_classifier_inferencing_categories[i];
+        // instead of wait_ms, we'll wait on the signal, this allows threads to cancel us...
+        if (ei_sleep(2000) != EI_IMPULSE_OK) {
+            break;
         }
-    }
 
-    // 3. PREPARAR DADOS
-    String jsonPayload = "{\n  \"classe_dominante\": \"";
-    jsonPayload += max_label;
-    jsonPayload += "\",\n  \"confianca\": ";
-    jsonPayload += String(max_val, 2);
-    jsonPayload += "\n}";
+        // --- ADIÇÃO: DESLIGA O BLE PARA A CÂMARA NÃO SUFOCAR O RÁDIO ---
+        BLE.disconnect();
+        BLE.stopAdvertise();
+        // ---------------------------------------------------------------
 
-    ei_free(snapshot_mem);
+        ei_printf("Taking photo...\n");
 
-    // 4. LIGAR BLE E ENVIAR ASSIM QUE O PI SE CONECTAR E SUBSCREVER
-    BLE.advertise();
-    // ei_printf("Visao pronta. A aguardar Raspberry Pi...\n");
+        if (ei_camera_init() == false) {
+            ei_printf("ERR: Failed to initialize image sensor\r\n");
+            break;
+        }
 
-    unsigned long start_time = millis();
-    // Espera até 10 segundos que o Pi se ligue
-    while (millis() - start_time < 10000) {
-        BLEDevice central = BLE.central();
-        if (central && central.connected()) {
-            
-            // O Pi ligou-se! Agora esperamos que ele "descubra os serviços" (GATT)
-            unsigned long conn_time = millis();
-            while (central.connected() && (millis() - conn_time < 4000)) {
-                
-                // Assim que o Pi estiver pronto e subscrever a notificação, disparamos!
-                if (jsonChar.subscribed()) {
-                    jsonChar.writeValue(jsonPayload);
-                    ei_printf("Visao enviada: %s (%.2f)\n", max_label, max_val);
-                    delay(500); // Meio segundo para garantir que o rádio envia o pacote com sucesso
-                    break;      // Sai da espera de subscrição
-                }
-                delay(10);
+        // choose resize dimensions
+        uint32_t resize_col_sz;
+        uint32_t resize_row_sz;
+        bool do_resize = false;
+        int res = calculate_resize_dimensions(EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT, &resize_col_sz, &resize_row_sz, &do_resize);
+        if (res) {
+            ei_printf("ERR: Failed to calculate resize dimensions (%d)\r\n", res);
+            break;
+        }
+
+        void *snapshot_mem = NULL;
+        uint8_t *snapshot_buf = NULL;
+        snapshot_mem = ei_malloc(resize_col_sz*resize_row_sz*2);
+        if(snapshot_mem == NULL) {
+            ei_printf("failed to create snapshot_mem\r\n");
+            break;
+        }
+        snapshot_buf = (uint8_t *)DWORD_ALIGN_PTR((uintptr_t)snapshot_mem);
+
+        if (ei_camera_capture(EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT, snapshot_buf) == false) {
+            ei_printf("Failed to capture image\r\n");
+            if (snapshot_mem) ei_free(snapshot_mem);
+            break;
+        }
+
+        ei::signal_t signal;
+        signal.total_length = EI_CLASSIFIER_INPUT_WIDTH * EI_CLASSIFIER_INPUT_HEIGHT;
+        signal.get_data = &ei_camera_cutout_get_data;
+
+        // run the impulse: DSP, neural network and the Anomaly algorithm
+        ei_impulse_result_t result = { 0 };
+
+        EI_IMPULSE_ERROR ei_error = run_classifier(&signal, &result, debug_nn);
+        if (ei_error != EI_IMPULSE_OK) {
+            ei_printf("Failed to run impulse (%d)\n", ei_error);
+            ei_free(snapshot_mem);
+            break;
+        }
+
+        // print the predictions
+        ei_printf("Predictions (DSP: %d ms., Classification: %d ms., Anomaly: %d ms.): \n",
+                  result.timing.dsp, result.timing.classification, result.timing.anomaly);
+#if EI_CLASSIFIER_OBJECT_DETECTION == 1
+        ei_printf("Object detection bounding boxes:\r\n");
+        for (uint32_t i = 0; i < result.bounding_boxes_count; i++) {
+            ei_impulse_result_bounding_box_t bb = result.bounding_boxes[i];
+            if (bb.value == 0) {
+                continue;
             }
-            break; // Sai do ciclo de procura para reiniciar o loop (que vai fazer o BLE.disconnect pacífico)
+            ei_printf("  %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\r\n",
+                    bb.label,
+                    bb.value,
+                    bb.x,
+                    bb.y,
+                    bb.width,
+                    bb.height);
         }
-        delay(10);
+
+    // Print the prediction results (classification)
+#else
+        ei_printf("Predictions:\r\n");
+        for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
+            ei_printf("  %s: ", ei_classifier_inferencing_categories[i]);
+            ei_printf("%.5f\r\n", result.classification[i].value);
+        }
+#endif
+
+    // Print anomaly result (if it exists)
+#if EI_CLASSIFIER_HAS_ANOMALY
+        ei_printf("Anomaly prediction: %.3f\r\n", result.anomaly);
+#endif
+
+#if EI_CLASSIFIER_HAS_VISUAL_ANOMALY
+        ei_printf("Visual anomalies:\r\n");
+        for (uint32_t i = 0; i < result.visual_ad_count; i++) {
+            ei_impulse_result_bounding_box_t bb = result.visual_ad_grid_cells[i];
+            if (bb.value == 0) {
+                continue;
+            }
+            ei_printf("  %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\r\n",
+                    bb.label,
+                    bb.value,
+                    bb.x,
+                    bb.y,
+                    bb.width,
+                    bb.height);
+        }
+#endif
+
+        // --- ADIÇÃO: PREPARAR E ENVIAR DADOS POR BLE ---
+        float max_val = 0.0;
+        const char* max_label = "indefinido";
+
+#if EI_CLASSIFIER_OBJECT_DETECTION == 1
+        for (uint32_t i = 0; i < result.bounding_boxes_count; i++) {
+            if (result.bounding_boxes[i].value > max_val) {
+                max_val = result.bounding_boxes[i].value;
+                max_label = result.bounding_boxes[i].label;
+            }
+        }
+#else
+        for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
+            if (result.classification[i].value > max_val) {
+                max_val = result.classification[i].value;
+                max_label = ei_classifier_inferencing_categories[i];
+            }
+        }
+#endif
+
+        String jsonPayload = "{\n  \"classe_dominante\": \"";
+        jsonPayload += max_label;
+        jsonPayload += "\",\n  \"confianca\": ";
+        jsonPayload += String(max_val, 2);
+        jsonPayload += "\n}";
+
+        BLE.advertise();
+        
+        unsigned long start_time = millis();
+        // Espera até 10 segundos que o Pi (ou outro Gateway) se ligue
+        while (millis() - start_time < 10000) {
+            BLEDevice central = BLE.central();
+            if (central && central.connected()) {
+                // Ligado! Agora esperamos que ele subscreva (GATT)
+                unsigned long conn_time = millis();
+                while (central.connected() && (millis() - conn_time < 4000)) {
+                    if (jsonChar.subscribed()) {
+                        jsonChar.writeValue(jsonPayload);
+                        ei_printf("Visao enviada por BLE: %s (%.2f)\n", max_label, max_val);
+                        delay(500); // Dar tempo ao rádio para processar o pacote
+                        break;
+                    }
+                    delay(10);
+                }
+                break;
+            }
+            delay(10);
+        }
+        // ------------------------------------------------
+
+        while (ei_get_serial_available() > 0) {
+            if (ei_get_serial_byte() == 'b') {
+                ei_printf("Inferencing stopped by user\r\n");
+                stop_inferencing = true;
+            }
+        }
+        if (snapshot_mem) ei_free(snapshot_mem);
     }
+    ei_camera_deinit();
 }
 
 /**
@@ -281,9 +376,9 @@ int calculate_resize_dimensions(uint32_t out_width, uint32_t out_height, uint32_
 }
 
 /**
- * @brief  Setup image sensor & start streaming
+ * @brief   Setup image sensor & start streaming
  *
- * @retval false if initialisation failed
+ * @retval  false if initialisation failed
  */
 bool ei_camera_init(void) {
     if (is_initialised) return true;
