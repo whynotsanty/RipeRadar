@@ -19,7 +19,7 @@ devices:
     timeout: 10.0
   arduino:
     name: "Arduino33"
-    uuid: "19B10011-E8F2-537E-4F6C-D104768A1214"
+    uuid: "19B10000-E8F2-537E-4F6C-D104768A1214"
     description: "Câmara com modelo de visão (classificação de fruta)"
     timeout: 10.0
 

@@ -81,39 +81,33 @@ def validar_valor(valor, key):
 
 def aplicar_late_fusion(payload):
     """
-    Calcula o estado atrav�s dos gases e aplica o Override se a vis�o falhar.
+    Calcula o estado através dos gases e aplica o Override se a visão falhar.
     """
     classe_visual = payload.get("classe_dominante", "desconhecido")
-    
-    # CORRE��O 2: O fallback por defeito passa para 1.0 (escala 0.0 a 1.0)
-    confianca = float(payload.get("confianca", 1.0)) 
+    confianca = float(payload.get("confianca", 100.0)) 
     voc_gas = float(payload.get("voc_gas", 0.0))
 
     fruto = classe_visual.split("_")[0].lower()
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. O Nicla calcula sempre a sua previs�o com base nos Ohms
+    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
     previsao_nicla = "desconhecido"
-    
-    if fruto in ["banana", "maca"]: # Climat�ricos
+    if fruto in ["banana", "maca"]:
         if voc_gas > 17000:
-            previsao_nicla = "fresco" # Ajustado para bater com Streamlit
+            previsao_nicla = "fresca"
         elif 13000 <= voc_gas <= 17000:
-            previsao_nicla = "maduro"
+            previsao_nicla = "madura"
         else:
             previsao_nicla = "podre"
-            
-    elif fruto == "laranja": # N�o-Climat�ricos (CORRE��O 1: Matriz completa)
-        if voc_gas > 16000:
-            previsao_nicla = "firme"
-        elif 13000 <= voc_gas <= 16000:
-            previsao_nicla = "risco"
+    elif fruto == "laranja":
+        if voc_gas >= 16000:
+            previsao_nicla = "fresca"
         else:
-            previsao_nicla = "degradada"
+            previsao_nicla = "podre"
 
-    # 2. Avalia quem tem raz�o (Confian�a < 60% = Nicla ganha e faz Override)
-    if confianca < 0.60 and fruto != "desconhecido":
+    # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
+    if confianca < 0.60 and fruto != "desconhecido": # Ajustado para bater certo com escala 0 a 1 do Arduino
         decisao_final = f"{fruto}_{previsao_nicla}"
     else:
         decisao_final = classe_visual
@@ -223,13 +217,24 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
     
-    tarefa_nicla = asyncio.create_task(gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify"))
-    tarefa_visao = asyncio.create_task(gerir_conexao(CONFIG['devices']['arduino']['name'], CONFIG['devices']['arduino']['uuid'], vision_handler, "read"))
+    # O Nicla mantém-se igual
+    tarefa_nicla = asyncio.create_task(
+        gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify")
+    )
+    
+    # CORREÇÃO PARA O ARDUINO33:
+    # 1. Usar o UUID da Característica (19B10011...) definido no .ino em vez do Serviço
+    # 2. Mudar o modo para "notify" para que a condição `jsonChar.subscribed()` no Arduino seja verdadeira
+    UUID_CHAR_ARDUINO = "19B10011-E8F2-537E-4F6C-D104768A1214"
+    tarefa_visao = asyncio.create_task(
+        gerir_conexao(CONFIG['devices']['arduino']['name'], UUID_CHAR_ARDUINO, vision_handler, "notify")
+    )
+    
     tarefa_pub = asyncio.create_task(publicacao_periodica_scheduler())
     tarefa_health = asyncio.create_task(healthcheck_scheduler())
     
     await asyncio.gather(tarefa_nicla, tarefa_visao, tarefa_pub, tarefa_health)
-
+    
 if __name__ == "__main__":
     try:
         asyncio.run(main())

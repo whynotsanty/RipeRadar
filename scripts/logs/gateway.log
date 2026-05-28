@@ -7166,3 +7166,412 @@ task: <Task cancelling name='Task-1' coro=<main() done, defined at /home/user/pr
 [2026-05-28 16:27:30,750] [INFO] [RipeRadar] [PUB 30s] Result: maca_fresca | Conf Final: 89.1% (Cam: 49.2% / Nicla: 99.0%) | VOCs: 27574.0 Ohms
 [2026-05-28 16:28:00,751] [INFO] [RipeRadar] [PUB 30s] Result: maca_fresca | Conf Final: 89.1% (Cam: 49.2% / Nicla: 99.0%) | VOCs: 27699.0 Ohms
 [2026-05-28 16:28:30,753] [INFO] [RipeRadar] [PUB 30s] Result: maca_fresca | Conf Final: 89.1% (Cam: 49.2% / Nicla: 99.0%) | VOCs: 27880.0 Ohms
+[2026-05-28 16:28:48,779] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 16:28:53,951] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 16:28:53,951] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 16:28:53,951] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 16:28:53,966] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 16:28:54,012] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 16:28:54,227] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 16:29:24,013] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28045.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:29:54,015] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28119.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:30:24,017] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28193.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:30:54,018] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28306.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:31:24,019] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28362.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:31:54,020] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28381.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:32:24,022] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28533.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:32:54,023] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28571.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:33:24,024] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28667.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:33:54,024] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28822.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:34:24,025] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28783.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:34:54,026] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28802.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:35:24,028] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28841.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:35:54,029] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28939.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:36:24,030] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28920.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:36:54,031] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29117.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:37:24,032] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29038.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:37:54,033] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29077.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:38:24,034] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29117.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:38:54,035] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29237.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:39:24,036] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29378.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:39:54,037] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29378.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:40:24,038] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29398.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:40:54,039] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29459.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:41:24,041] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29479.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:41:54,042] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29438.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:42:24,043] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29479.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:42:54,045] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29479.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:43:24,046] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29479.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:43:54,048] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29581.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:44:24,050] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29581.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:44:54,052] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29561.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:45:24,053] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 1569048.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:45:54,055] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 149140.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:46:24,056] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28100.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:46:54,059] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 27292.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:47:24,060] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 27898.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:47:54,061] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28249.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:48:24,062] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28514.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:48:54,064] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28686.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:49:24,065] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28802.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:49:54,066] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28998.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:50:24,068] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 28900.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:50:54,069] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29038.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:51:24,070] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29197.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:51:54,071] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29137.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:52:24,072] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29217.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:52:54,074] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29277.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:53:24,075] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29317.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:53:54,077] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29378.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:54:24,078] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29520.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:54:54,081] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29459.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:55:24,082] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29581.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:55:54,083] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29459.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:56:24,084] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29561.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:56:54,085] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29520.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:57:24,086] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29602.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:57:54,087] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29705.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:58:24,089] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29561.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:58:54,090] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29581.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:59:24,092] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29684.0 Ohms | Nicla: desconhecido
+[2026-05-28 16:59:48,829] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 16:59:48,830] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 16:59:48,830] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 16:59:48,844] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 16:59:48,865] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 16:59:49,349] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 16:59:54,093] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29622.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:00:11,158] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:00:17,557] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:17,558] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:00:17,558] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:17,572] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:00:17,597] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:00:17,827] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:00:24,094] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 29622.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:00:24,770] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:00:26,023] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:26,024] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:00:26,024] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:26,040] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:00:26,082] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:00:26,354] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:00:26,760] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:00:28,243] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:28,243] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:00:28,243] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:28,258] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:00:28,280] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:00:28,518] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:00:38,976] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:00:40,295] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:00:41,106] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:41,107] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:00:41,108] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:00:41,130] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:00:41,180] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:00:41,502] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:01:11,183] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:01:41,184] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:02:11,186] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:02:41,188] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:02:45,859] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:03:33,170] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:03:33,171] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:03:33,171] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:03:33,195] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:03:33,221] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:03:33,468] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:04:03,224] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:04:33,226] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:05:03,228] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:05:33,229] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:06:03,231] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:06:33,232] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:07:03,234] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:07:33,236] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:08:03,237] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:08:33,238] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:09:03,239] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:09:33,240] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:09:37,547] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:09:38,602] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:09:38,602] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:09:38,602] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:09:38,616] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:09:38,639] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:09:38,881] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:10:08,640] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:10:38,642] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:10:56,488] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:11:14,393] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:11:14,393] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:11:14,393] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:11:14,408] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:11:14,431] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:11:14,720] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:11:44,433] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:12:04,580] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:12:05,473] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:12:05,473] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:12:05,474] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:12:05,491] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:12:05,515] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:12:05,759] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:12:35,518] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:12:41,571] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:28:17,936] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:17,936] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:28:17,936] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:17,951] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:28:17,980] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:28:17,989] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:18,235] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:28:19,992] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:21,994] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:23,996] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:25,998] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:27,131] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:28:31,631] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:31,631] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:28:31,631] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:31,645] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:28:31,668] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:28:31,675] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:31,880] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:28:33,676] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:33,800] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:28:40,265] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:40,265] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:28:40,265] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:28:40,280] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:28:40,305] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:28:40,316] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:40,513] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:28:42,317] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:44,319] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:46,322] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:48,325] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:50,330] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: Device with address RipeRadar was not found.
+[2026-05-28 17:28:52,333] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:54,334] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:56,336] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:28:58,338] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:00,350] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: Device with address Arduino33 was not found.
+[2026-05-28 17:29:02,355] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:04,359] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:06,360] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:08,361] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:10,307] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:29:10,339] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:29:13,876] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:29:13,876] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:29:13,876] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:29:13,890] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:29:13,913] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:29:13,922] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:14,139] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:29:15,924] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:17,926] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:29:19,180] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:30:06,144] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:30:06,144] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:30:06,144] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:30:06,159] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:30:06,180] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:30:06,187] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:06,517] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:30:08,188] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:10,190] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:12,194] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:14,195] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:16,201] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: Device with address RipeRadar was not found.
+[2026-05-28 17:30:18,203] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:20,205] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:22,206] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:24,208] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:26,220] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: Device with address Arduino33 was not found.
+[2026-05-28 17:30:28,222] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:30,224] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:32,225] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:34,227] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:36,181] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:30:36,242] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: Device with address RipeRadar was not found.
+[2026-05-28 17:30:38,244] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:40,246] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:42,248] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:44,249] [ERROR] [RipeRadar] Erro BLE no dispositivo RipeRadar: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:46,267] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: Device with address Arduino33 was not found.
+[2026-05-28 17:30:48,269] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:50,271] [ERROR] [RipeRadar] Erro BLE no dispositivo Arduino33: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:30:51,547] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:33:43,200] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:33:43,200] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:33:43,201] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:33:43,214] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:33:43,235] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:33:43,243] [ERROR] [RipeRadar] Erro de ligacao em XX:XX:XX:XX:XX:XX: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:33:43,546] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:33:45,245] [ERROR] [RipeRadar] Erro de ligacao em XX:XX:XX:XX:XX:XX: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:33:46,910] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:34:22,243] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:34:22,243] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:34:22,243] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:34:22,259] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:34:22,282] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:34:22,289] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:34:22,515] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:34:24,292] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:34:26,294] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:34:28,296] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:34:30,297] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:34:31,373] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:35:57,312] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:35:57,312] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:35:57,312] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:35:57,326] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:35:57,347] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:35:57,355] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:35:57,577] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:35:58,949] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:36:01,018] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:01,018] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:36:01,018] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:01,034] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:36:01,064] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:36:01,072] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:01,404] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:36:01,833] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:36:07,198] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:07,198] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:36:07,198] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:07,213] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:36:07,242] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:36:07,253] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:07,458] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:36:09,255] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:11,256] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:13,196] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:36:33,033] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:33,034] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:36:33,034] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:36:33,050] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:36:33,083] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:36:33,093] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:33,296] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:36:35,094] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:37,096] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:39,097] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:41,100] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:43,103] [ERROR] [RipeRadar] Erro de ligacao em 19B10001-E8F2-537E-4F6C-D104768A1214: Device with address 19B10001-E8F2-537E-4F6C-D104768A1214 was not found.
+[2026-05-28 17:36:45,105] [ERROR] [RipeRadar] Erro de ligacao em 19B10001-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:47,107] [ERROR] [RipeRadar] Erro de ligacao em 19B10001-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:49,109] [ERROR] [RipeRadar] Erro de ligacao em 19B10001-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:51,112] [ERROR] [RipeRadar] Erro de ligacao em 19B10001-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:36:53,124] [ERROR] [RipeRadar] Erro de ligacao em 19B10000-E8F2-537E-4F6C-D104768A1214: Device with address 19B10000-E8F2-537E-4F6C-D104768A1214 was not found.
+[2026-05-28 17:36:53,685] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:38:18,028] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:38:18,028] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:38:18,028] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:38:18,043] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:38:18,064] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:38:18,072] [ERROR] [RipeRadar] Erro de ligacao em 19B10011-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:18,428] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:38:20,075] [ERROR] [RipeRadar] Erro de ligacao em 19B10011-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:22,076] [ERROR] [RipeRadar] Erro de ligacao em 19B10011-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:24,078] [ERROR] [RipeRadar] Erro de ligacao em 19B10011-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:26,080] [ERROR] [RipeRadar] Erro de ligacao em 19B10011-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:27,528] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:38:38,408] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:38:38,408] [INFO] [RipeRadar] Gateway Iniciado - Modo de Ligacao Direta (MAC) | Timer (30s)
+[2026-05-28 17:38:38,408] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:38:38,423] [INFO] [RipeRadar] A iniciar conectores BLE em segundo plano...
+[2026-05-28 17:38:38,447] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:38:38,455] [ERROR] [RipeRadar] Erro de ligacao em 19B10099-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:38,677] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:38:40,457] [ERROR] [RipeRadar] Erro de ligacao em 19B10099-E8F2-537E-4F6C-D104768A1214: [org.bluez.Error.InProgress] Operation already in progress
+[2026-05-28 17:38:41,470] [INFO] [RipeRadar] A encerrar Gateway...
+[2026-05-28 17:42:43,376] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:42:43,377] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:42:43,377] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:42:43,393] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:42:43,432] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:42:43,653] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:43:13,433] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 24404.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:43:34,825] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:43:36,547] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:43:36,547] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:43:36,547] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:43:36,562] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:43:36,588] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:43:36,803] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:44:06,589] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 24844.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:44:36,590] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 25122.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:45:06,592] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 25316.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:45:36,592] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 25467.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:46:06,595] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: maca_fresca | Conf. Camara: 0.480 | Label Camara: maca_fresca | VOCs: 1249923.0 Ohms | Nicla: fresca
+[2026-05-28 17:46:36,596] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.510 | Label Camara: banana_fresca | VOCs: 146453.0 Ohms | Nicla: fresca
+[2026-05-28 17:46:53,710] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:48:00,811] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:48:00,811] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:48:00,811] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:48:00,826] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:48:00,847] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:48:01,119] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:48:30,849] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:49:00,850] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:49:30,852] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 0.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:50:00,853] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 552617.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:50:30,854] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 153569.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:50:53,305] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:51:09,048] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:51:09,048] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:51:09,048] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:51:09,064] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:51:09,091] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:51:09,398] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:51:39,094] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 375848.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:52:09,096] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: Desconhecido | Conf. Camara: 0.000 | Label Camara: Desconhecido | VOCs: 70156.0 Ohms | Nicla: desconhecido
+[2026-05-28 17:52:39,097] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.480 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:53:09,098] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.430 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:53:39,100] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.550 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:54:09,101] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.530 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:54:39,102] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.410 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:55:09,104] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.500 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:55:39,105] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.570 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:56:09,106] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_fresca | Conf. Camara: 0.550 | Label Camara: banana_fresca | VOCs: 70156.0 Ohms | Nicla: fresca
+[2026-05-28 17:56:36,515] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:58:36,512] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:58:36,512] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:58:36,512] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:58:36,527] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:58:36,548] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:58:36,835] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:59:06,549] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.360 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 17:59:17,047] [INFO] [RipeRadar] Encerrando Gateway...
+[2026-05-28 17:59:25,391] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:59:25,391] [INFO] [RipeRadar] Gateway Iniciado - Modo de Publicacao Temporizada (30s)
+[2026-05-28 17:59:25,391] [INFO] [RipeRadar] ================================================================================
+[2026-05-28 17:59:25,407] [INFO] [RipeRadar] Iniciando conectores BLE em pano de fundo...
+[2026-05-28 17:59:25,428] [INFO] [RipeRadar] Scheduler de Publicacao ativado (Intervalo: 30s)
+[2026-05-28 17:59:25,694] [INFO] [RipeRadar] Ligado ao HiveMQ Cloud!
+[2026-05-28 17:59:55,430] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.270 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:00:25,432] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: maca_podre | Conf. Camara: 0.330 | Label Camara: maca_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:00:55,433] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.320 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:01:25,434] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.330 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:01:55,436] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.340 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:02:25,453] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.280 | Label Camara: laranja_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:02:55,454] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.340 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:03:25,456] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.310 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:03:55,457] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.250 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:04:25,458] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.340 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:04:55,460] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.330 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:05:25,461] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: maca_podre | Conf. Camara: 0.360 | Label Camara: maca_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:05:55,462] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.340 | Label Camara: laranja_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:06:25,464] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.280 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:06:55,465] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.320 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:07:25,466] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: laranja_podre | Conf. Camara: 0.500 | Label Camara: laranja_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:07:55,469] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.340 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:08:25,471] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: maca_podre | Conf. Camara: 0.330 | Label Camara: maca_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:08:55,472] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: maca_podre | Conf. Camara: 0.360 | Label Camara: maca_fresca | VOCs: 0.0 Ohms | Nicla: podre
+[2026-05-28 18:09:25,474] [INFO] [RipeRadar] [PUBLICACAO 30s] Decisao: banana_podre | Conf. Camara: 0.280 | Label Camara: banana_fresca | VOCs: 0.0 Ohms | Nicla: podre
