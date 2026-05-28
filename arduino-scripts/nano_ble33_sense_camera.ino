@@ -282,6 +282,30 @@ void loop()
         }
 #endif
 
+        // ====================================================================
+        // ADIÇÃO: ENVIAR OS PÍXEIS DA IMAGEM ATUAL VIA SERIAL (HEX)
+        // ====================================================================
+        Serial.println("FRAME_START");
+        for (size_t i = 0; i < (EI_CLASSIFIER_INPUT_WIDTH * EI_CLASSIFIER_INPUT_HEIGHT); i++) {
+            float pixel_f = 0;
+            ei_camera_cutout_get_data(i, 1, &pixel_f);
+            uint32_t pixel = (uint32_t)pixel_f;
+            
+            uint8_t r = (pixel >> 16) & 0xFF;
+            uint8_t g = (pixel >> 8) & 0xFF;
+            uint8_t b = pixel & 0xFF;
+
+            if (r < 16) Serial.print("0");
+            Serial.print(r, HEX);
+            if (g < 16) Serial.print("0");
+            Serial.print(g, HEX);
+            if (b < 16) Serial.print("0");
+            Serial.print(b, HEX);
+        }
+        Serial.println(); 
+        Serial.println("FRAME_END");
+        // ====================================================================
+
         // --- ADIÇÃO: PREPARAR E ENVIAR DADOS POR BLE ---
         float max_val = 0.0;
         const char* max_label = "indefinido";

@@ -91,19 +91,25 @@ def aplicar_late_fusion(payload):
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. O Nicla calcula sempre a sua previsão com base nos Ohms
+    # 1. O Nicla calcula a sua previs�o com base nos limiares documentados
     previsao_nicla = "desconhecido"
-    if fruto in ["banana", "maca"]:
-        if voc_gas > 17000:
+    
+    if fruto == "banana":
+        if voc_gas < 27500:
             previsao_nicla = "fresca"
-        elif 13000 <= voc_gas <= 17000:
-            previsao_nicla = "madura"
-        else:
+        elif 27500 <= voc_gas <= 31000:
             previsao_nicla = "podre"
-    elif fruto == "laranja":
-        if voc_gas >= 16000:
+    
+    elif fruto == "maca":
+        if voc_gas < 33000:
             previsao_nicla = "fresca"
-        else:
+        elif 33000 <= voc_gas <= 38000:
+            previsao_nicla = "podre"
+            
+    elif fruto == "laranja":
+        if voc_gas < 28500:
+            previsao_nicla = "fresca"
+        elif 28500 <= voc_gas <= 32000:
             previsao_nicla = "podre"
 
     # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
