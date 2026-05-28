@@ -12,6 +12,9 @@ import yaml
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from bleak import BleakClient, BleakScanner
+# CORREÇÃO: Importação explícita das classes necessárias do InfluxDB
+from influxdb_client import InfluxDBClient, Point
+from influxdb_client.client.write_api import SYNCHRONOUS
 
 # 1. Carregamento de configuração
 load_dotenv()
@@ -50,13 +53,68 @@ mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=random_id,
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
 
-def on_connect(client, userdata, flags, reason_code, properties):
-    if reason_code == 0: logger.info("Ligado ao HiveMQ Cloud!")
-    else: logger.error(f"Falha na ligacao: {reason_code}")
+# Inicialização do cliente InfluxDB Cloud usando as variáveis do teu .env
+influx_client = InfluxDBClient(
+    url=os.getenv("INFLUX_URL"), 
+    token=os.getenv("INFLUX_TOKEN"), 
+    org=os.getenv("INFLUX_ORG")
+)
+write_api = influx_client.write_api(write_options=SYNCHRONOUS)
+INFLUX_BUCKET = os.getenv("INFLUX_BUCKET")
 
+def on_connect(client, userdata, flags, reason_code, properties):
+    if reason_code == 0: 
+        logger.info("Ligado ao HiveMQ Cloud!")
+        # Subscreve o tópico de autenticação e o de rastreabilidade de caixas
+        client.subscribe("riperadar/v1/management/auth/+/session")
+        client.subscribe("riperadar/v1/sorting/rfid/+/box_id")
+    else: 
+        logger.error(f"Falha na ligacao: {reason_code}")
+
+def on_message(client, userdata, message):
+    try:
+        topic = message.topic
+        payload = json.loads(message.payload.decode("utf-8"))
+        
+        # 1. Processamento e Persistência do Login (RFID Operadores/Chefes)
+        if "management/auth" in topic:
+            uid = payload.get('operator_id')
+            role = payload.get('role')
+            status = payload.get('status')
+            logger.info(f"Cartão RFID detetado no Gateway! ID: {uid}")
+            
+            point = Point("user_sessions") \
+                .tag("operator_id", uid) \
+                .field("role", role) \
+                .field("status", status)
+
+            write_api.write(bucket=INFLUX_BUCKET, record=point)
+            logger.info("Sessão de login persistida no InfluxDB com sucesso.")
+            
+        # 2. Processamento e Persistência do Tracking de Caixas (RFID Caixas de Fruta)
+        elif "sorting/rfid" in topic:
+            box_id = payload.get('box_id')
+            status = payload.get('status')
+            origin = payload.get('origin')
+            logger.info(f"Tag RFID de caixa detetada no Gateway! ID: {box_id}")
+            
+            point = Point("mqtt_consumer") \
+                .tag("box_id", box_id) \
+                .tag("origin", origin) \
+                .field("status", status)
+                
+            write_api.write(bucket=INFLUX_BUCKET, record=point)
+            logger.info("Registo de caixa de fruta persistido no InfluxDB com sucesso.")
+            
+    except Exception as e:
+        logger.error(f"Erro ao processar mensagem: {e}")
+
+# Associar as funções de callback ao cliente
 mqtt_client.on_connect = on_connect
+mqtt_client.on_message = on_message 
+
 mqtt_client.connect_async(MQTT_BROKER, MQTT_PORT, 60)
-mqtt_client.loop_start() 
+mqtt_client.loop_start()
 
 # Locks para paralelismo seguro
 ble_scan_lock = asyncio.Lock()
@@ -107,7 +165,7 @@ def aplicar_late_fusion(payload):
             previsao_nicla = "podre"
 
     # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
-    if confianca < 0.60 and fruto != "desconhecido": # Ajustado para bater certo com escala 0 a 1 do Arduino
+    if confianca < 0.60 and fruto != "desconhecido": 
         decisao_final = f"{fruto}_{previsao_nicla}"
     else:
         decisao_final = classe_visual
@@ -171,7 +229,6 @@ async def publicacao_periodica_scheduler():
             # Envia para a Cloud
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
-            # Print focado e direto (sem acentos para não quebrar no terminal)
             logger.info(
                 f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
                 f"Conf. Camara: {payload_final['confianca']:.3f} | "
