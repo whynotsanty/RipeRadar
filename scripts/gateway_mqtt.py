@@ -12,8 +12,6 @@ import yaml
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from bleak import BleakClient, BleakScanner
-from influxdb_client import InfluxDBClient, Point
-from influxdb_client.client.write_api import SYNCHRONOUS
 
 # 1. Carregamento de configuração
 load_dotenv()
@@ -35,7 +33,7 @@ console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
 
 logger.info("=" * 80)
-logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s) c/ Late Fusion")
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
 logger.info("=" * 80)
 
 # Configurações MQTT
@@ -52,64 +50,13 @@ mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=random_id,
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
 
-# Inicialização do cliente InfluxDB Cloud
-influx_client = InfluxDBClient(
-    url=os.getenv("INFLUX_URL"), 
-    token=os.getenv("INFLUX_TOKEN"), 
-    org=os.getenv("INFLUX_ORG")
-)
-write_api = influx_client.write_api(write_options=SYNCHRONOUS)
-INFLUX_BUCKET = os.getenv("INFLUX_BUCKET")
-
 def on_connect(client, userdata, flags, reason_code, properties):
-    if reason_code == 0: 
-        logger.info("Ligado ao HiveMQ Cloud!")
-        client.subscribe("riperadar/v1/management/auth/+/session")
-        client.subscribe("riperadar/v1/sorting/rfid/+/box_id")
-    else: 
-        logger.error(f"Falha na ligacao: {reason_code}")
-
-def on_message(client, userdata, message):
-    try:
-        topic = message.topic
-        payload = json.loads(message.payload.decode("utf-8"))
-        
-        if "management/auth" in topic:
-            uid = payload.get('operator_id')
-            role = payload.get('role')
-            status = payload.get('status')
-            logger.info(f"Cartão RFID detetado no Gateway! ID: {uid}")
-            
-            point = Point("user_sessions") \
-                .tag("operator_id", uid) \
-                .field("role", role) \
-                .field("status", status)
-
-            write_api.write(bucket=INFLUX_BUCKET, record=point)
-            logger.info("Sessão de login persistida no InfluxDB com sucesso.")
-            
-        elif "sorting/rfid" in topic:
-            box_id = payload.get('box_id')
-            status = payload.get('status')
-            origin = payload.get('origin')
-            logger.info(f"Tag RFID de caixa detetada no Gateway! ID: {box_id}")
-            
-            point = Point("mqtt_consumer") \
-                .tag("box_id", box_id) \
-                .tag("origin", origin) \
-                .field("status", status)
-                
-            write_api.write(bucket=INFLUX_BUCKET, record=point)
-            logger.info("Registo de caixa de fruta persistido no InfluxDB com sucesso.")
-            
-    except Exception as e:
-        logger.error(f"Erro ao processar mensagem: {e}")
+    if reason_code == 0: logger.info("Ligado ao HiveMQ Cloud!")
+    else: logger.error(f"Falha na ligacao: {reason_code}")
 
 mqtt_client.on_connect = on_connect
-mqtt_client.on_message = on_message 
-
 mqtt_client.connect_async(MQTT_BROKER, MQTT_PORT, 60)
-mqtt_client.loop_start()
+mqtt_client.loop_start() 
 
 # Locks para paralelismo seguro
 ble_scan_lock = asyncio.Lock()
@@ -132,90 +79,49 @@ def validar_valor(valor, key):
         return min_v <= valor <= max_v
     return True
 
-# -----------------------------------------------------------------------------
-# LÓGICA DE FUSÃO E CONFIANÇA
-# -----------------------------------------------------------------------------
-def calcular_confianca_nicla(voc_gas, fruto):
-    """
-    Sintetiza uma confiança [0.5 a 1.0] baseada na distância aos thresholds.
-    """
-    if fruto in ["banana", "maca"]:
-        if voc_gas > 17000:
-            dist = voc_gas - 17000
-            return 0.5 + min(dist / 4000.0, 0.49)
-        elif 13000 <= voc_gas <= 17000:
-            dist_centro = abs(voc_gas - 15000)
-            return 1.0 - (dist_centro / 2000.0) * 0.5
-        else:
-            dist = 13000 - voc_gas
-            return 0.5 + min(dist / 4000.0, 0.49)
-            
-    elif fruto == "laranja":
-        if voc_gas >= 16000:
-            dist = voc_gas - 16000
-            return 0.5 + min(dist / 4000.0, 0.49)
-        else:
-            dist = 16000 - voc_gas
-            return 0.5 + min(dist / 4000.0, 0.49)
-            
-    return 0.0
-
 def aplicar_late_fusion(payload):
     """
-    Calcula o estado através dos gases e aplica o Override se a visão falhar,
-    gerando uma Confiança Final do sistema.
+    Calcula o estado atrav�s dos gases e aplica o Override se a vis�o falhar.
     """
     classe_visual = payload.get("classe_dominante", "desconhecido")
-    # Assegurar que a confiança da câmara está em formato decimal (0.0 a 1.0)
-    confianca_cam = float(payload.get("confianca", 1.0))
-    if confianca_cam > 1.0: 
-        confianca_cam = confianca_cam / 100.0 
-        
+    
+    # CORRE��O 2: O fallback por defeito passa para 1.0 (escala 0.0 a 1.0)
+    confianca = float(payload.get("confianca", 1.0)) 
     voc_gas = float(payload.get("voc_gas", 0.0))
 
     fruto = classe_visual.split("_")[0].lower()
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. Previsão do Nicla
+    # 1. O Nicla calcula sempre a sua previs�o com base nos Ohms
     previsao_nicla = "desconhecido"
-    if fruto in ["banana", "maca"]:
-        if voc_gas > 17000: previsao_nicla = "fresca"
-        elif 13000 <= voc_gas <= 17000: previsao_nicla = "madura"
-        else: previsao_nicla = "podre"
-    elif fruto == "laranja":
-        if voc_gas >= 16000: previsao_nicla = "fresca"
-        else: previsao_nicla = "podre"
-
-    # 2. Confiança do Nicla
-    confianca_nicla = calcular_confianca_nicla(voc_gas, fruto)
-
-    # 3. Fusão de Decisão e Confiança Final
-    if confianca_cam < 0.60 and fruto != "desconhecido": 
-        # Nicla assume o controlo devido à baixa confiança da câmara
-        decisao_final = f"{fruto}_{previsao_nicla}"
-        confianca_final = confianca_nicla * 0.9 
-    else:
-        # Câmara assume o controlo
-        decisao_final = classe_visual
-        # Se o Nicla concordar com a câmara, dá-se um "boost" à confiança
-        if previsao_nicla in classe_visual:
-            confianca_final = min(confianca_cam + (confianca_nicla * 0.15), 1.0)
+    
+    if fruto in ["banana", "maca"]: # Climat�ricos
+        if voc_gas > 17000:
+            previsao_nicla = "fresco" # Ajustado para bater com Streamlit
+        elif 13000 <= voc_gas <= 17000:
+            previsao_nicla = "maduro"
         else:
-            confianca_final = confianca_cam
+            previsao_nicla = "podre"
+            
+    elif fruto == "laranja": # N�o-Climat�ricos (CORRE��O 1: Matriz completa)
+        if voc_gas > 16000:
+            previsao_nicla = "firme"
+        elif 13000 <= voc_gas <= 16000:
+            previsao_nicla = "risco"
+        else:
+            previsao_nicla = "degradada"
 
-    # 4. Empacota os dados para enviar para o MQTT
+    # 2. Avalia quem tem raz�o (Confian�a < 60% = Nicla ganha e faz Override)
+    if confianca < 0.60 and fruto != "desconhecido":
+        decisao_final = f"{fruto}_{previsao_nicla}"
+    else:
+        decisao_final = classe_visual
+
+    # 3. Empacota os dados para enviar para o MQTT
     payload["classe_dominante"] = decisao_final
     payload["label_camara"] = classe_visual
     payload["previsao_nicla"] = previsao_nicla
-    
-    # Atualiza métricas de confiança no payload (percentagens)
-    payload["confianca_camara"] = round(confianca_cam * 100, 2)
-    payload["confianca_nicla"] = round(confianca_nicla * 100, 2)
-    payload["confianca_final"] = round(confianca_final * 100, 2)
-    
-    # Mantém a chave 'confianca' base compatível, agora refletindo a final
-    payload["confianca"] = payload["confianca_final"]
 
     return payload
 
@@ -252,6 +158,9 @@ def vision_handler(sender, data):
 # SCHEDULERS (Tratam da Publicação MQTT)
 # -----------------------------------------------------------------------------
 async def publicacao_periodica_scheduler():
+    """
+    O Relógio Mestre: A cada 30 segundos exatos publica.
+    """
     logger.info("Scheduler de Publicacao ativado (Intervalo: 30s)")
     while True:
         await asyncio.sleep(30)
@@ -268,11 +177,13 @@ async def publicacao_periodica_scheduler():
             # Envia para a Cloud
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
+            # Print focado e direto (sem acentos para não quebrar no terminal)
             logger.info(
-                f"[PUB 30s] Result: {payload_final['classe_dominante']} | "
-                f"Conf Final: {payload_final['confianca_final']}% "
-                f"(Cam: {payload_final['confianca_camara']}% / Nicla: {payload_final['confianca_nicla']}%) | "
-                f"VOCs: {payload_final['voc_gas']} Ohms"
+                f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
+                f"Conf. Camara: {payload_final['confianca']:.3f} | "
+                f"Label Camara: {payload_final['label_camara']} | "
+                f"VOCs: {payload_final['voc_gas']} Ohms | "
+                f"Nicla: {payload_final['previsao_nicla']}"
             )
         except Exception as e:
             logger.error(f"Erro ao publicar: {e}")
