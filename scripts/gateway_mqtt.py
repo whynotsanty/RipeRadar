@@ -9,7 +9,6 @@ import threading
 import logging
 import logging.handlers
 import yaml
-import keyboard  # <--- NOVA DEPENDÊNCIA PARA O TECLADO
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from bleak import BleakClient, BleakScanner
@@ -36,7 +35,7 @@ console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
 
 logger.info("=" * 80)
-logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (5s)") # Atualizado
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (5s) + SSH Override")
 logger.info("=" * 80)
 
 # Configurações MQTT
@@ -134,7 +133,7 @@ def aplicar_late_fusion(payload):
     return payload
 
 # -----------------------------------------------------------------------------
-# CONTROLADOR DE TECLADO (OVERRIDE MANUAL) - NOVO
+# CONTROLADOR DE TERMINAL VIA SSH (OVERRIDE MANUAL)
 # -----------------------------------------------------------------------------
 def forcar_classe(nova_classe):
     # Gera uma confiança aleatória entre 60% (0.60) e 100% (1.00)
@@ -144,19 +143,36 @@ def forcar_classe(nova_classe):
         system_state["classe_dominante"] = nova_classe
         system_state["confianca"] = confianca_random
         
-    logger.info(f"👉 [OVERRIDE TECLADO] Classe forçada: {nova_classe} | Confiança gerada: {confianca_random}")
+    logger.info(f"👉 [OVERRIDE APLICADO] Classe forçada: {nova_classe} | Confiança: {confianca_random}")
 
-def iniciar_escuta_teclado():
-    """
-    Escuta as sequências de teclas em background.
-    """
-    keyboard.add_hotkey('b, p', lambda: forcar_classe("banana_podre"))
-    keyboard.add_hotkey('b, f', lambda: forcar_classe("banana_fresca"))
-    keyboard.add_hotkey('l, p', lambda: forcar_classe("laranja_podre"))
-    keyboard.add_hotkey('l, f', lambda: forcar_classe("laranja_fresca"))
-    keyboard.add_hotkey('m, p', lambda: forcar_classe("maca_podre"))
-    keyboard.add_hotkey('m, f', lambda: forcar_classe("maca_fresca"))
-    logger.info("Escuta de teclado ativada. Use 'bp', 'bf', 'lp', 'lf', 'mp', 'mf' para testar.")
+def loop_de_input_terminal():
+    """Fica à espera de comandos escritos no terminal SSH em background"""
+    time.sleep(2) # Pequena pausa apenas para as mensagens iniciais passarem
+    logger.info("=" * 80)
+    logger.info("👉 MODO TESTE ATIVO: Escreva no terminal e prima ENTER:")
+    logger.info("   'bp' = Banana Podre | 'bf' = Banana Fresca")
+    logger.info("   'lp' = Laranja Podre | 'lf' = Laranja Fresca")
+    logger.info("   'mp' = Maca Podre   | 'mf' = Maca Fresca")
+    logger.info("=" * 80)
+    
+    while True:
+        try:
+            comando = input().strip().lower() # Lê o que o utilizador escreve e carrega ENTER
+            if comando == 'bp': forcar_classe("banana_podre")
+            elif comando == 'bf': forcar_classe("banana_fresca")
+            elif comando == 'lp': forcar_classe("laranja_podre")
+            elif comando == 'lf': forcar_classe("laranja_fresca")
+            elif comando == 'mp': forcar_classe("maca_podre")
+            elif comando == 'mf': forcar_classe("maca_fresca")
+            else:
+                if comando != "": logger.warning(f"Comando desconhecido: '{comando}'. Use apenas bp, bf, lp, lf, mp ou mf.")
+        except Exception:
+            pass # Ignora erros de input ao fechar o programa
+
+def iniciar_escuta_terminal():
+    """Inicia a thread do terminal"""
+    thread_input = threading.Thread(target=loop_de_input_terminal, daemon=True)
+    thread_input.start()
 
 # -----------------------------------------------------------------------------
 # HANDLERS BLE (Atualizam a memória silenciosamente)
@@ -192,11 +208,11 @@ def vision_handler(sender, data):
 # -----------------------------------------------------------------------------
 async def publicacao_periodica_scheduler():
     """
-    O Relógio Mestre: A cada 5 segundos exatos publica. (ATUALIZADO)
+    O Relógio Mestre: A cada 5 segundos exatos publica.
     """
     logger.info("Scheduler de Publicacao ativado (Intervalo: 5s)")
     while True:
-        await asyncio.sleep(5)  # Alterado para 5 segundos
+        await asyncio.sleep(5)  
         try:
             with state_lock:
                 payload_bruto = system_state.copy()
@@ -211,11 +227,9 @@ async def publicacao_periodica_scheduler():
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
             logger.info(
-                f"[PUBLICACAO 5s] Decisao: {payload_final['classe_dominante']} | "
-                f"Conf. Camara: {payload_final['confianca']:.3f} | "
-                f"Label Camara: {payload_final['label_camara']} | "
-                f"VOCs: {payload_final['voc_gas']} Ohms | "
-                f"Nicla: {payload_final['previsao_nicla']}"
+                f"[PUB 5s] Fusao Final: {payload_final['classe_dominante']} | "
+                f"Camara: {payload_final['label_camara']} ({payload_final['confianca']:.2f}) | "
+                f"Gases: {payload_final['voc_gas']} Ohms | Nicla diz: {payload_final['previsao_nicla']}"
             )
         except Exception as e:
             logger.error(f"Erro ao publicar: {e}")
@@ -258,8 +272,8 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
     
-    # Ativar o hook do teclado mal o script inicie
-    iniciar_escuta_teclado()
+    # Ativar a escuta de terminal para SSH
+    iniciar_escuta_terminal()
     
     tarefa_nicla = asyncio.create_task(
         gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify")
