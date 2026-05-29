@@ -9,11 +9,14 @@ import threading
 import logging
 import logging.handlers
 import yaml
+import keyboard  # <--- NOVA DEPENDÊNCIA PARA O TECLADO
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from bleak import BleakClient, BleakScanner
 
-# 1. Carregamento de configuração
+# -----------------------------------------------------------------------------
+# 1. CARREGAMENTO DE CONFIGURAÇÃO E LOGGING
+# -----------------------------------------------------------------------------
 load_dotenv()
 config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
 with open(config_path, 'r', encoding='utf-8') as f:
@@ -33,7 +36,7 @@ console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
 
 logger.info("=" * 80)
-logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (5s)") # Atualizado
 logger.info("=" * 80)
 
 # Configurações MQTT
@@ -45,7 +48,9 @@ MQTT_USER = os.getenv("MQTT_USER")
 MQTT_PASS = os.getenv("MQTT_PASS")
 random_id = f"RaspberryPi_Gateway_{random.randint(1000, 9999)}"
 
-# 2. Configuração do Cliente MQTT 
+# -----------------------------------------------------------------------------
+# 2. CONFIGURAÇÃO DO CLIENTE MQTT
+# -----------------------------------------------------------------------------
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=random_id, protocol=mqtt.MQTTv5)
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
@@ -68,6 +73,9 @@ system_state = {
     "classe_dominante": "Desconhecido", "confianca": 0.0
 }
 
+# -----------------------------------------------------------------------------
+# LÓGICA CORE: VALIDAÇÃO E FUSÃO (LATE FUSION)
+# -----------------------------------------------------------------------------
 def validar_valor(valor, key):
     ranges = {
         "temp": (CONFIG['validation']['temperature']['min'], CONFIG['validation']['temperature']['max']),
@@ -126,7 +134,32 @@ def aplicar_late_fusion(payload):
     return payload
 
 # -----------------------------------------------------------------------------
-# HANDLERS (Apenas atualizam a memória silenciosamente)
+# CONTROLADOR DE TECLADO (OVERRIDE MANUAL) - NOVO
+# -----------------------------------------------------------------------------
+def forcar_classe(nova_classe):
+    # Gera uma confiança aleatória entre 60% (0.60) e 100% (1.00)
+    confianca_random = round(random.uniform(0.60, 1.00), 3)
+    
+    with state_lock:
+        system_state["classe_dominante"] = nova_classe
+        system_state["confianca"] = confianca_random
+        
+    logger.info(f"👉 [OVERRIDE TECLADO] Classe forçada: {nova_classe} | Confiança gerada: {confianca_random}")
+
+def iniciar_escuta_teclado():
+    """
+    Escuta as sequências de teclas em background.
+    """
+    keyboard.add_hotkey('b, p', lambda: forcar_classe("banana_podre"))
+    keyboard.add_hotkey('b, f', lambda: forcar_classe("banana_fresca"))
+    keyboard.add_hotkey('l, p', lambda: forcar_classe("laranja_podre"))
+    keyboard.add_hotkey('l, f', lambda: forcar_classe("laranja_fresca"))
+    keyboard.add_hotkey('m, p', lambda: forcar_classe("maca_podre"))
+    keyboard.add_hotkey('m, f', lambda: forcar_classe("maca_fresca"))
+    logger.info("Escuta de teclado ativada. Use 'bp', 'bf', 'lp', 'lf', 'mp', 'mf' para testar.")
+
+# -----------------------------------------------------------------------------
+# HANDLERS BLE (Atualizam a memória silenciosamente)
 # -----------------------------------------------------------------------------
 def nicla_handler(sender, data):
     payload = data.decode('utf-8').strip()
@@ -159,17 +192,17 @@ def vision_handler(sender, data):
 # -----------------------------------------------------------------------------
 async def publicacao_periodica_scheduler():
     """
-    O Relógio Mestre: A cada 30 segundos exatos publica.
+    O Relógio Mestre: A cada 5 segundos exatos publica. (ATUALIZADO)
     """
-    logger.info("Scheduler de Publicacao ativado (Intervalo: 30s)")
+    logger.info("Scheduler de Publicacao ativado (Intervalo: 5s)")
     while True:
-        await asyncio.sleep(30)
+        await asyncio.sleep(5)  # Alterado para 5 segundos
         try:
             with state_lock:
                 payload_bruto = system_state.copy()
             
             payload_bruto["timestamp"] = time.time()
-            payload_bruto["origem_trigger"] = "timer_30s"
+            payload_bruto["origem_trigger"] = "timer_5s"
 
             # Aplica a inteligência da Fusão
             payload_final = aplicar_late_fusion(payload_bruto)
@@ -178,7 +211,7 @@ async def publicacao_periodica_scheduler():
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
             logger.info(
-                f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
+                f"[PUBLICACAO 5s] Decisao: {payload_final['classe_dominante']} | "
                 f"Conf. Camara: {payload_final['confianca']:.3f} | "
                 f"Label Camara: {payload_final['label_camara']} | "
                 f"VOCs: {payload_final['voc_gas']} Ohms | "
@@ -219,10 +252,15 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
         
         await asyncio.sleep(1)
 
+# -----------------------------------------------------------------------------
+# ARRANQUE PRINCIPAL
+# -----------------------------------------------------------------------------
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
     
-    # O Nicla mantém-se igual
+    # Ativar o hook do teclado mal o script inicie
+    iniciar_escuta_teclado()
+    
     tarefa_nicla = asyncio.create_task(
         gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify")
     )
