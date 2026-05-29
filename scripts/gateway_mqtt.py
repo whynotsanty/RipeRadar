@@ -13,9 +13,7 @@ import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 from bleak import BleakClient, BleakScanner
 
-# -----------------------------------------------------------------------------
-# 1. CARREGAMENTO DE CONFIGURAÇÃO E LOGGING
-# -----------------------------------------------------------------------------
+# 1. Carregamento de configuração
 load_dotenv()
 config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
 with open(config_path, 'r', encoding='utf-8') as f:
@@ -35,7 +33,7 @@ console_handler.setFormatter(logging.Formatter(CONFIG['logging']['format']))
 logger.addHandler(console_handler)
 
 logger.info("=" * 80)
-logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (5s) + SSH Override")
+logger.info("Gateway Iniciado - Modo de Publicacao Temporizada (30s)")
 logger.info("=" * 80)
 
 # Configurações MQTT
@@ -47,9 +45,7 @@ MQTT_USER = os.getenv("MQTT_USER")
 MQTT_PASS = os.getenv("MQTT_PASS")
 random_id = f"RaspberryPi_Gateway_{random.randint(1000, 9999)}"
 
-# -----------------------------------------------------------------------------
-# 2. CONFIGURAÇÃO DO CLIENTE MQTT
-# -----------------------------------------------------------------------------
+# 2. Configuração do Cliente MQTT 
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=random_id, protocol=mqtt.MQTTv5)
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
@@ -72,9 +68,6 @@ system_state = {
     "classe_dominante": "Desconhecido", "confianca": 0.0
 }
 
-# -----------------------------------------------------------------------------
-# LÓGICA CORE: VALIDAÇÃO E FUSÃO (LATE FUSION)
-# -----------------------------------------------------------------------------
 def validar_valor(valor, key):
     ranges = {
         "temp": (CONFIG['validation']['temperature']['min'], CONFIG['validation']['temperature']['max']),
@@ -98,29 +91,29 @@ def aplicar_late_fusion(payload):
     if fruto not in ["banana", "maca", "laranja"]:
         fruto = "desconhecido"
 
-    # 1. O Nicla calcula a sua previsao com base nos limiares documentados
+    # 1. O Nicla calcula a sua previs�o com base nos limiares documentados
     previsao_nicla = "desconhecido"
     
     if fruto == "banana":
         if voc_gas < 27500:
             previsao_nicla = "fresca"
-        elif 27500 <= voc_gas:
+        elif 27500 <= voc_gas <= 31000:
             previsao_nicla = "podre"
     
     elif fruto == "maca":
         if voc_gas < 33000:
             previsao_nicla = "fresca"
-        elif 33000 <= voc_gas:
+        elif 33000 <= voc_gas <= 38000:
             previsao_nicla = "podre"
             
     elif fruto == "laranja":
         if voc_gas < 28500:
             previsao_nicla = "fresca"
-        elif 28500 <= voc_gas:
+        elif 28500 <= voc_gas <= 32000:
             previsao_nicla = "podre"
 
     # 2. Avalia quem tem razão (Confiança < 60% = Nicla ganha)
-    if confianca < 0.60 and fruto != "desconhecido":
+    if confianca < 0.60 and fruto != "desconhecido": # Ajustado para bater certo com escala 0 a 1 do Arduino
         decisao_final = f"{fruto}_{previsao_nicla}"
     else:
         decisao_final = classe_visual
@@ -133,49 +126,7 @@ def aplicar_late_fusion(payload):
     return payload
 
 # -----------------------------------------------------------------------------
-# CONTROLADOR DE TERMINAL VIA SSH (OVERRIDE MANUAL)
-# -----------------------------------------------------------------------------
-def forcar_classe(nova_classe):
-    # Gera uma confiança aleatória entre 60% (0.60) e 100% (1.00)
-    confianca_random = round(random.uniform(0.60, 1.00), 3)
-    
-    with state_lock:
-        system_state["classe_dominante"] = nova_classe
-        system_state["confianca"] = confianca_random
-        
-    logger.info(f"👉 [OVERRIDE APLICADO] Classe forçada: {nova_classe} | Confiança: {confianca_random}")
-
-def loop_de_input_terminal():
-    """Fica à espera de comandos escritos no terminal SSH em background"""
-    time.sleep(2) # Pequena pausa apenas para as mensagens iniciais passarem
-    logger.info("=" * 80)
-    logger.info("👉 MODO TESTE ATIVO: Escreva no terminal e prima ENTER:")
-    logger.info("   'bp' = Banana Podre | 'bf' = Banana Fresca")
-    logger.info("   'lp' = Laranja Podre | 'lf' = Laranja Fresca")
-    logger.info("   'mp' = Maca Podre   | 'mf' = Maca Fresca")
-    logger.info("=" * 80)
-    
-    while True:
-        try:
-            comando = input().strip().lower() # Lê o que o utilizador escreve e carrega ENTER
-            if comando == 'bp': forcar_classe("banana_podre")
-            elif comando == 'bf': forcar_classe("banana_fresca")
-            elif comando == 'lp': forcar_classe("laranja_podre")
-            elif comando == 'lf': forcar_classe("laranja_fresca")
-            elif comando == 'mp': forcar_classe("maca_podre")
-            elif comando == 'mf': forcar_classe("maca_fresca")
-            else:
-                if comando != "": logger.warning(f"Comando desconhecido: '{comando}'. Use apenas bp, bf, lp, lf, mp ou mf.")
-        except Exception:
-            pass # Ignora erros de input ao fechar o programa
-
-def iniciar_escuta_terminal():
-    """Inicia a thread do terminal"""
-    thread_input = threading.Thread(target=loop_de_input_terminal, daemon=True)
-    thread_input.start()
-
-# -----------------------------------------------------------------------------
-# HANDLERS BLE (Atualizam a memória silenciosamente)
+# HANDLERS (Apenas atualizam a memória silenciosamente)
 # -----------------------------------------------------------------------------
 def nicla_handler(sender, data):
     payload = data.decode('utf-8').strip()
@@ -208,17 +159,17 @@ def vision_handler(sender, data):
 # -----------------------------------------------------------------------------
 async def publicacao_periodica_scheduler():
     """
-    O Relógio Mestre: A cada 5 segundos exatos publica.
+    O Relógio Mestre: A cada 30 segundos exatos publica.
     """
-    logger.info("Scheduler de Publicacao ativado (Intervalo: 5s)")
+    logger.info("Scheduler de Publicacao ativado (Intervalo: 30s)")
     while True:
-        await asyncio.sleep(5)  
+        await asyncio.sleep(30)
         try:
             with state_lock:
                 payload_bruto = system_state.copy()
             
             payload_bruto["timestamp"] = time.time()
-            payload_bruto["origem_trigger"] = "timer_5s"
+            payload_bruto["origem_trigger"] = "timer_30s"
 
             # Aplica a inteligência da Fusão
             payload_final = aplicar_late_fusion(payload_bruto)
@@ -226,10 +177,13 @@ async def publicacao_periodica_scheduler():
             # Envia para a Cloud
             mqtt_client.publish(MQTT_TOPIC, json.dumps(payload_final), qos=1)
             
+            # Print focado e direto (sem acentos para não quebrar no terminal)
             logger.info(
-                f"[PUB 5s] Fusao Final: {payload_final['classe_dominante']} | "
-                f"Camara: {payload_final['label_camara']} ({payload_final['confianca']:.2f}) | "
-                f"Gases: {payload_final['voc_gas']} Ohms | Nicla diz: {payload_final['previsao_nicla']}"
+                f"[PUBLICACAO 30s] Decisao: {payload_final['classe_dominante']} | "
+                f"Conf. Camara: {payload_final['confianca']:.3f} | "
+                f"Label Camara: {payload_final['label_camara']} | "
+                f"VOCs: {payload_final['voc_gas']} Ohms | "
+                f"Nicla: {payload_final['previsao_nicla']}"
             )
         except Exception as e:
             logger.error(f"Erro ao publicar: {e}")
@@ -266,19 +220,17 @@ async def gerir_conexao(nome_dispositivo, char_uuid, handler, modo="notify"):
         
         await asyncio.sleep(1)
 
-# -----------------------------------------------------------------------------
-# ARRANQUE PRINCIPAL
-# -----------------------------------------------------------------------------
 async def main():
     logger.info("Iniciando conectores BLE em pano de fundo...")
     
-    # Ativar a escuta de terminal para SSH
-    iniciar_escuta_terminal()
-    
+    # O Nicla mantém-se igual
     tarefa_nicla = asyncio.create_task(
         gerir_conexao(CONFIG['devices']['nicla']['name'], CONFIG['devices']['nicla']['uuid'], nicla_handler, "notify")
     )
     
+    # CORREÇÃO PARA O ARDUINO33:
+    # 1. Usar o UUID da Característica (19B10011...) definido no .ino em vez do Serviço
+    # 2. Mudar o modo para "notify" para que a condição `jsonChar.subscribed()` no Arduino seja verdadeira
     UUID_CHAR_ARDUINO = "19B10011-E8F2-537E-4F6C-D104768A1214"
     tarefa_visao = asyncio.create_task(
         gerir_conexao(CONFIG['devices']['arduino']['name'], UUID_CHAR_ARDUINO, vision_handler, "notify")
