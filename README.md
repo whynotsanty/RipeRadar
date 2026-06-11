@@ -1,179 +1,178 @@
-# RipeRadar: Sistema de Monitorização Inteligente da Maturação de Frutas
+# RipeRadar: Intelligent Fruit Ripening Monitoring System
 
-## 📋 Visão Geral
+## 📋 Overview
 
-**RipeRadar** é um sistema de IoT integrado para monitorização em tempo real da maturação de frutas, combinando sensores biométricos de baixa potência (BLE) com visão computacional. Este projeto académico demonstra a aplicação de Machine Learning em cenários edge computing, avaliando o impacto de diferentes arquiteturas de processamento no consumo energético de dispositivos.
+**RipeRadar** is an integrated IoT system for real-time fruit ripening monitoring, combining low-power biometric sensors (BLE) with computer vision. This academic project demonstrates the application of Machine Learning in edge computing scenarios, evaluating the impact of different processing architectures on device energy consumption.
 
-### Objetivo Principal
+### Main Objective
 
-Desenvolver uma solução para classificação automática do estado de maturação de frutas utilizando:
-- **Sensores ambientais** (temperatura, humidade, pressão, VOC)
-- **Visão computacional** (classificação visual da fruta)
-- **Comunicação BLE + MQTT** para transmissão de dados
-- **Análise comparativa** de pipelines de processamento
+Develop a solution for the automatic classification of the fruit ripening state using:
+- **Environmental sensors** (temperature, humidity, pressure, VOC)
+- **Computer vision** (visual fruit classification)
+- **BLE + MQTT communication** for data transmission
+- **Comparative analysis** of processing pipelines
 
 ---
 
-## Arquitetura do Sistema
+## System Architecture
 
-### Componentes de Hardware
+### Hardware Components
 
-| Componente | Modelo | Função |
+| Component | Model | Function |
 |-----------|--------|--------|
-| **Sensor Principal** | NICLA Sense ME | Coleta ambiental (T, H, P, VOC) via BLE |
-| **Câmara/Visão** | Arduino Nano 33 | Captura e classificação visual |
-| **Gateway** | Raspberry Pi | Bridge BLE-MQTT, orquestração |
-| **Broker MQTT** | HiveMQ Cloud | Comunicação remota, armazenamento |
+| **Main Sensor** | NICLA Sense ME | Environmental data collection (T, H, P, VOC) via BLE |
+| **Camera/Vision** | Arduino Nano 33 | Visual capture and classification |
+| **Gateway** | Raspberry Pi | BLE-MQTT bridge, orchestration |
+| **MQTT Broker** | HiveMQ Cloud | Remote communication, storage |
 
-### Fluxo de Dados
+### Data Flow
 
-```
+```text
 [NICLA Sense ME] ─BLE─> [Gateway PC/RPi] ─MQTT─> [HiveMQ Cloud]
-[Arduino + Câmara] ─┘                               ↓
-                                              [Backend/Análise]
+[Arduino + Camera] ─┘                                  ↓
+                                               [Backend/Analysis]
 ```
 
-### Cenários Experimentais Avaliados
+### Evaluated Experimental Scenarios
 
-1. **Repouso (Idle)**: Baseline de consumo energético
-2. **Inferência Local**: Processamento sem envio MQTT
-3. **Pipeline Completa**: Coleta, processamento e transmissão MQTT
+1. **Idle**: Energy consumption baseline
+2. **Local Inference**: Processing without MQTT transmission
+3. **Complete Pipeline**: Data collection, processing, and MQTT transmission
 
 ---
 
-## Estrutura do Projeto
+## Project Structure
 
-```
+```text
 RipeRadar/
-├── arduino-scripts/           # Código para dispositivos
+├── arduino-scripts/           # Code for devices
 │   ├── nano_ble33_sense_camera.ino
 │   ├── nicla_sense_me.ino
 │   └── UNOr4Wifi.ino
-├── scripts/                   # Python - orquestração e análise
-│   ├── gateway_mqtt.py       # Gateway BLE-MQTT
-│   └── config.yaml           # Configuração centralizada
-├── data/                      # Dados experimentais
-│   ├── raw/                  # Dados brutos capturados
+├── scripts/                   # Python - orchestration and analysis
+│   ├── gateway_mqtt.py        # BLE-MQTT Gateway
+│   └── config.yaml            # Centralized configuration
+├── data/                      # Experimental data
+│   ├── raw/                   # Raw captured data
 │   │   ├── idle.csv
 │   │   ├── sem_mqtt.csv
 │   │   └── com_mqtt.csv
-├── env/                       # Ambiente de execução
+├── env/                       # Execution environment
 │   ├── requirements.txt
 └── LICENSE
 ```
 
 ---
 
-## Instalação e Configuração
+## Installation and Configuration
 
-### Pré-requisitos
+### Prerequisites
 
 - Python 3.8+
-- Broker MQTT (HiveMQ Cloud ou local)
-- Dispositivos Arduino/NICLA Sense ME
-- Bibliotecas BLE e MQTT
+- MQTT Broker (HiveMQ Cloud or local)
+- Arduino/NICLA Sense ME devices
+- BLE and MQTT libraries
 
 ---
 
-##  Utilização
+## Usage
 
-### 1. Gateway MQTT
+### 1. MQTT Gateway
 ```bash
 python scripts/gateway_mqtt.py
 ```
-- Liga-se aos sensores BLE
-- Transmite dados para broker MQTT
+- Connects to BLE sensors
+- Transmits data to the MQTT broker
 
-
-### 4. Análise de Consumo Energético
+### 2. Energy Consumption Analysis
 ```bash
 python scripts/analisar_consumo.py
 ```
-- Comparação entre os três cenários
-- Gráficos de consumo (idle, sem MQTT, com MQTT)
-- Estatísticas de desempenho
+- Comparison between the three scenarios
+- Consumption graphs (idle, without MQTT, with MQTT)
+- Performance statistics
 
 ---
 
-## Dados e Resultados
+## Data and Results
 
-### Ficheiros de Dados Disponíveis
+### Available Data Files
 
-| Ficheiro | Descrição | Registos |
+| File | Description | Records |
 |----------|-----------|----------|
-| `data/raw/idle.csv` | Baseline sem processamento | ~1000 |
-| `data/raw/sem_mqtt.csv` | Inferência local | ~1000 |
-| `data/raw/com_mqtt.csv` | Pipeline MQTT completa | ~1000 |
+| `data/raw/idle.csv` | Baseline without processing | ~1000 |
+| `data/raw/sem_mqtt.csv` | Local inference | ~1000 |
+| `data/raw/com_mqtt.csv` | Complete MQTT pipeline | ~1000 |
 
-### Métricas Avaliadas
+### Evaluated Metrics
 
-- **Consumo de energia**: mW, mAh, duração de bateria
-- **Latência**: Tempo de captura → transmissão
-- **Precisão**: Classificação de maturação
-- **Disponibilidade**: Taxa de uptime/conexão
+- **Energy consumption**: mW, mAh, battery life
+- **Latency**: Capture time → transmission
+- **Accuracy**: Ripening classification
+- **Availability**: Uptime/connection rate
 
 ---
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-### Software & Bibliotecas
+### Software & Libraries
 - **Python 3.8+**
   - `bleak` - BLE client
-  - `paho-mqtt` - Cliente MQTT
-  - `pandas`, `numpy` - Análise de dados
-  - `scikit-learn` - ML/classificação
-  - `matplotlib`, `seaborn` - Visualização
+  - `paho-mqtt` - MQTT Client
+  - `pandas`, `numpy` - Data analysis
+  - `scikit-learn` - ML/classification
+  - `matplotlib`, `seaborn` - Visualization
 
-- **Infraestrutura**
-  - HiveMQ Cloud (broker MQTT)
-  - Docker (containerização)
-  - Conda/pip (gestão de dependências)
+- **Infrastructure**
+  - HiveMQ Cloud (MQTT broker)
+  - Docker (containerization)
+  - Conda/pip (dependency management)
 
+## Available Visualizations
 
-## Visualizações Disponíveis
-
-Análise em `data/raw/`:
+Analysis in `data/raw/`:
 
 ### `gerar_boxplot.py`
-Cria boxplots de consumo por cenário
-```
-Cenário              | Min   | Q1    | Mediana | Q3    | Max
-Repouso (Idle)      | 85mW  | 95mW  | 100mW   | 105mW | 115mW
-Inferência (Sem)    | 200mW | 220mW | 240mW   | 260mW | 280mW
-Pipeline (Com)      | 320mW | 350mW | 380mW   | 410mW | 450mW
+Creates consumption boxplots per scenario
+```text
+Scenario             | Min   | Q1    | Median  | Q3    | Max
+Idle                 | 85mW  | 95mW  | 100mW   | 105mW | 115mW
+Inference (Without)  | 200mW | 220mW | 240mW   | 260mW | 280mW
+Pipeline (With)      | 320mW | 350mW | 380mW   | 410mW | 450mW
 ```
 
 ### `gerar_energia_acumulada.py`
-Visualiza energia acumulada ao longo do tempo
+Visualizes accumulated energy over time
 
 ### `gerar_perfil_temporal.py`
-Análise temporal de padrões de consumo
+Temporal analysis of consumption patterns
 
 ---
 
-## Autores e Contribuições
+## Authors and Contributions
 
-**Autores**: Eduarda Pereira, Gonçalo Ferreira, Gonçalo Magalhães  
-**Instituição**: Universidade do Minho  
-**Ano Letivo**: 2025-2026
-**UC**: Internet das Coisas Aplicada
----
-
-## Licença
-
-Este projeto está licenciado sob a **Licença MIT**. Veja [LICENSE](LICENSE) para detalhes.
+**Authors**: Eduarda Pereira, Gonçalo Ferreira, Gonçalo Magalhães  
+**Institution**: University of Minho  
+**Academic Year**: 2025-2026  
+**Course**: Applied Internet of Things  
 
 ---
 
-## Referências e Recursos
+## License
 
-### Documentação Oficial
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+---
+
+## References and Resources
+
+### Official Documentation
 - [NICLA Sense ME Datasheet](https://docs.arduino.cc/hardware/nicla-sense-me)
 - [Bleak - BLE Client](https://bleak.readthedocs.io/)
 - [Eclipse Paho MQTT](https://www.eclipse.org/paho/)
 - [HiveMQ Cloud](https://www.hivemq.com/mqtt-cloud/)
 
-### Papers Relacionados
-- IoT em monitorização agrícola
-- Edge computing e consumo energético
-- Classificação de frutas com visão computacional
+### Related Papers
+- IoT in agricultural monitoring
+- Edge computing and energy consumption
+- Fruit classification with computer vision
